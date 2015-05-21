@@ -634,20 +634,6 @@ class Google_Service_Books extends Google_Service
                   'type' => 'string',
                 ),
               ),
-            ),'get' => array(
-              'path' => 'mylibrary/annotations/{annotationId}',
-              'httpMethod' => 'GET',
-              'parameters' => array(
-                'annotationId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-                'source' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-              ),
             ),'insert' => array(
               'path' => 'mylibrary/annotations',
               'httpMethod' => 'POST',
@@ -694,10 +680,9 @@ class Google_Service_Books extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'pageIds' => array(
+                'updatedMax' => array(
                   'location' => 'query',
                   'type' => 'string',
-                  'repeated' => true,
                 ),
                 'contentVersion' => array(
                   'location' => 'query',
@@ -708,10 +693,6 @@ class Google_Service_Books extends Google_Service
                   'type' => 'string',
                 ),
                 'layerId' => array(
-                  'location' => 'query',
-                  'type' => 'string',
-                ),
-                'updatedMax' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -853,6 +834,10 @@ class Google_Service_Books extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                   'required' => true,
+                ),
+                'reason' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
                 'source' => array(
                   'location' => 'query',
@@ -1140,7 +1125,11 @@ class Google_Service_Books extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'source' => array(
+                'user_library_consistent_read' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+                'projection' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1148,7 +1137,7 @@ class Google_Service_Books extends Google_Service
                   'location' => 'query',
                   'type' => 'string',
                 ),
-                'projection' => array(
+                'source' => array(
                   'location' => 'query',
                   'type' => 'string',
                 ),
@@ -1845,8 +1834,9 @@ class Google_Service_Books_Myconfig_Resource extends Google_Service_Resource
   }
 
   /**
-   * Sets the settings for the user. Unspecified sub-objects will retain the
-   * existing value. (myconfig.updateUserSettings)
+   * Sets the settings for the user. If a sub-object is specified, it will
+   * overwrite the existing sub-object stored in the server. Unspecified sub-
+   * objects will retain the existing value. (myconfig.updateUserSettings)
    *
    * @param Google_Usersettings $postBody
    * @param array $optParams Optional parameters.
@@ -1899,22 +1889,6 @@ class Google_Service_Books_MylibraryAnnotations_Resource extends Google_Service_
   }
 
   /**
-   * Gets an annotation by its ID. (annotations.get)
-   *
-   * @param string $annotationId The ID for the annotation to retrieve.
-   * @param array $optParams Optional parameters.
-   *
-   * @opt_param string source String to identify the originator of this request.
-   * @return Google_Service_Books_Annotation
-   */
-  public function get($annotationId, $optParams = array())
-  {
-    $params = array('annotationId' => $annotationId);
-    $params = array_merge($params, $optParams);
-    return $this->call('get', array($params), "Google_Service_Books_Annotation");
-  }
-
-  /**
    * Inserts a new annotation. (annotations.insert)
    *
    * @param Google_Annotation $postBody
@@ -1948,14 +1922,12 @@ class Google_Service_Books_MylibraryAnnotations_Resource extends Google_Service_
    * @opt_param string maxResults Maximum number of results to return
    * @opt_param string pageToken The value of the nextToken from the previous
    * page.
-   * @opt_param string pageIds The page ID(s) for the volume that is being
-   * queried.
+   * @opt_param string updatedMax RFC 3339 timestamp to restrict to items updated
+   * prior to this timestamp (exclusive).
    * @opt_param string contentVersion The content version for the requested
    * volume.
    * @opt_param string source String to identify the originator of this request.
    * @opt_param string layerId The layer ID to limit annotation by.
-   * @opt_param string updatedMax RFC 3339 timestamp to restrict to items updated
-   * prior to this timestamp (exclusive).
    * @return Google_Service_Books_Annotations
    */
   public function listMylibraryAnnotations($optParams = array())
@@ -2100,6 +2072,8 @@ class Google_Service_Books_MylibraryBookshelves_Resource extends Google_Service_
    * @param string $volumeId ID of volume to remove.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string reason The reason for which the book is removed from the
+   * library.
    * @opt_param string source String to identify the originator of this request.
    */
   public function removeVolume($shelf, $volumeId, $optParams = array())
@@ -2344,10 +2318,11 @@ class Google_Service_Books_Volumes_Resource extends Google_Service_Resource
    * @param string $volumeId ID of volume to retrieve.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string source String to identify the originator of this request.
-   * @opt_param string country ISO-3166-1 code to override the IP-based location.
+   * @opt_param bool user_library_consistent_read
    * @opt_param string projection Restrict information returned to a set of
    * selected fields.
+   * @opt_param string country ISO-3166-1 code to override the IP-based location.
+   * @opt_param string source String to identify the originator of this request.
    * @opt_param string partner Brand results for partner ID.
    * @return Google_Service_Books_Volume
    */
@@ -4786,6 +4761,7 @@ class Google_Service_Books_OffersItems extends Google_Collection
   protected $internal_gapi_mappings = array(
   );
   public $artUrl;
+  public $gservicesKey;
   public $id;
   protected $itemsType = 'Google_Service_Books_OffersItemsItems';
   protected $itemsDataType = 'array';
@@ -4798,6 +4774,14 @@ class Google_Service_Books_OffersItems extends Google_Collection
   public function getArtUrl()
   {
     return $this->artUrl;
+  }
+  public function setGservicesKey($gservicesKey)
+  {
+    $this->gservicesKey = $gservicesKey;
+  }
+  public function getGservicesKey()
+  {
+    return $this->gservicesKey;
   }
   public function setId($id)
   {
@@ -6109,6 +6093,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   public $infoLink;
   public $language;
   public $mainCategory;
+  public $maturityRating;
   public $pageCount;
   public $previewLink;
   public $printType;
@@ -6117,6 +6102,7 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   public $publisher;
   public $ratingsCount;
   public $readingModes;
+  public $samplePageCount;
   public $subtitle;
   public $title;
 
@@ -6217,6 +6203,14 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   {
     return $this->mainCategory;
   }
+  public function setMaturityRating($maturityRating)
+  {
+    $this->maturityRating = $maturityRating;
+  }
+  public function getMaturityRating()
+  {
+    return $this->maturityRating;
+  }
   public function setPageCount($pageCount)
   {
     $this->pageCount = $pageCount;
@@ -6280,6 +6274,14 @@ class Google_Service_Books_VolumeVolumeInfo extends Google_Collection
   public function getReadingModes()
   {
     return $this->readingModes;
+  }
+  public function setSamplePageCount($samplePageCount)
+  {
+    $this->samplePageCount = $samplePageCount;
+  }
+  public function getSamplePageCount()
+  {
+    return $this->samplePageCount;
   }
   public function setSubtitle($subtitle)
   {

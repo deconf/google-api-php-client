@@ -16,7 +16,7 @@
  */
 
 /**
- * Service definition for Dfareporting (v2.0).
+ * Service definition for Dfareporting (v2.1).
  *
  * <p>
  * Manage your DoubleClick Campaign Manager ad campaigns and reports.</p>
@@ -66,23 +66,30 @@ class Google_Service_Dfareporting extends Google_Service
   public $floodlightActivities;
   public $floodlightActivityGroups;
   public $floodlightConfigurations;
+  public $inventoryItems;
   public $landingPages;
   public $metros;
   public $mobileCarriers;
   public $operatingSystemVersions;
   public $operatingSystems;
+  public $orderDocuments;
+  public $orders;
   public $placementGroups;
   public $placementStrategies;
   public $placements;
   public $platformTypes;
   public $postalCodes;
+  public $projects;
   public $regions;
+  public $remarketingListShares;
+  public $remarketingLists;
   public $reports;
   public $reports_compatibleFields;
   public $reports_files;
   public $sites;
   public $sizes;
   public $subaccounts;
+  public $targetableRemarketingLists;
   public $userProfiles;
   public $userRolePermissionGroups;
   public $userRolePermissions;
@@ -97,8 +104,8 @@ class Google_Service_Dfareporting extends Google_Service
   public function __construct(Google_Client $client)
   {
     parent::__construct($client);
-    $this->servicePath = 'dfareporting/v2.0/';
-    $this->version = 'v2.0';
+    $this->servicePath = 'dfareporting/v2.1/';
+    $this->version = 'v2.1';
     $this->serviceName = 'dfareporting';
 
     $this->accountActiveAdSummaries = new Google_Service_Dfareporting_AccountActiveAdSummaries_Resource(
@@ -212,6 +219,16 @@ class Google_Service_Dfareporting extends Google_Service
                   'required' => true,
                 ),
                 'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'insert' => array(
+              'path' => 'userprofiles/{profileId}/accountUserProfiles',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'profileId' => array(
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
@@ -1120,7 +1137,22 @@ class Google_Service_Dfareporting extends Google_Service
         'connectionTypes',
         array(
           'methods' => array(
-            'list' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/connectionTypes/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
               'path' => 'userprofiles/{profileId}/connectionTypes',
               'httpMethod' => 'GET',
               'parameters' => array(
@@ -1917,6 +1949,16 @@ class Google_Service_Dfareporting extends Google_Service
                   'required' => true,
                 ),
               ),
+            ),'insert' => array(
+              'path' => 'userprofiles/{profileId}/directorySites',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),'list' => array(
               'path' => 'userprofiles/{profileId}/directorySites',
               'httpMethod' => 'GET',
@@ -2506,6 +2548,86 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
+    $this->inventoryItems = new Google_Service_Dfareporting_InventoryItems_Resource(
+        $this,
+        $this->serviceName,
+        'inventoryItems',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/projects/{projectId}/inventoryItems/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'userprofiles/{profileId}/projects/{projectId}/inventoryItems',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'orderId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'ids' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'siteId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'inPlan' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+                'sortField' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortOrder' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),
+          )
+        )
+    );
     $this->landingPages = new Google_Service_Dfareporting_LandingPages_Resource(
         $this,
         $this->serviceName,
@@ -2647,7 +2769,22 @@ class Google_Service_Dfareporting extends Google_Service
         'mobileCarriers',
         array(
           'methods' => array(
-            'list' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/mobileCarriers/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
               'path' => 'userprofiles/{profileId}/mobileCarriers',
               'httpMethod' => 'GET',
               'parameters' => array(
@@ -2667,7 +2804,22 @@ class Google_Service_Dfareporting extends Google_Service
         'operatingSystemVersions',
         array(
           'methods' => array(
-            'list' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/operatingSystemVersions/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
               'path' => 'userprofiles/{profileId}/operatingSystemVersions',
               'httpMethod' => 'GET',
               'parameters' => array(
@@ -2687,7 +2839,22 @@ class Google_Service_Dfareporting extends Google_Service
         'operatingSystems',
         array(
           'methods' => array(
-            'list' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/operatingSystems/{dartId}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'dartId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
               'path' => 'userprofiles/{profileId}/operatingSystems',
               'httpMethod' => 'GET',
               'parameters' => array(
@@ -2695,6 +2862,165 @@ class Google_Service_Dfareporting extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->orderDocuments = new Google_Service_Dfareporting_OrderDocuments_Resource(
+        $this,
+        $this->serviceName,
+        'orderDocuments',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/projects/{projectId}/orderDocuments/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'userprofiles/{profileId}/projects/{projectId}/orderDocuments',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'orderId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'searchString' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'ids' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'siteId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'sortOrder' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortField' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'approved' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->orders = new Google_Service_Dfareporting_Orders_Resource(
+        $this,
+        $this->serviceName,
+        'orders',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/projects/{projectId}/orders/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'userprofiles/{profileId}/projects/{projectId}/orders',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'projectId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'searchString' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'ids' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'siteId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'sortOrder' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortField' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),
@@ -3132,7 +3458,22 @@ class Google_Service_Dfareporting extends Google_Service
         'platformTypes',
         array(
           'methods' => array(
-            'list' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/platformTypes/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
               'path' => 'userprofiles/{profileId}/platformTypes',
               'httpMethod' => 'GET',
               'parameters' => array(
@@ -3152,7 +3493,22 @@ class Google_Service_Dfareporting extends Google_Service
         'postalCodes',
         array(
           'methods' => array(
-            'list' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/postalCodes/{code}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'code' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
               'path' => 'userprofiles/{profileId}/postalCodes',
               'httpMethod' => 'GET',
               'parameters' => array(
@@ -3160,6 +3516,71 @@ class Google_Service_Dfareporting extends Google_Service
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->projects = new Google_Service_Dfareporting_Projects_Resource(
+        $this,
+        $this->serviceName,
+        'projects',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/projects/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'userprofiles/{profileId}/projects',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'searchString' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortField' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'advertiserIds' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'ids' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'repeated' => true,
+                ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortOrder' => array(
+                  'location' => 'query',
+                  'type' => 'string',
                 ),
               ),
             ),
@@ -3175,6 +3596,159 @@ class Google_Service_Dfareporting extends Google_Service
             'list' => array(
               'path' => 'userprofiles/{profileId}/regions',
               'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->remarketingListShares = new Google_Service_Dfareporting_RemarketingListShares_Resource(
+        $this,
+        $this->serviceName,
+        'remarketingListShares',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/remarketingListShares/{remarketingListId}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'remarketingListId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'patch' => array(
+              'path' => 'userprofiles/{profileId}/remarketingListShares',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'remarketingListId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'update' => array(
+              'path' => 'userprofiles/{profileId}/remarketingListShares',
+              'httpMethod' => 'PUT',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
+    $this->remarketingLists = new Google_Service_Dfareporting_RemarketingLists_Resource(
+        $this,
+        $this->serviceName,
+        'remarketingLists',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/remarketingLists/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'insert' => array(
+              'path' => 'userprofiles/{profileId}/remarketingLists',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'userprofiles/{profileId}/remarketingLists',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'advertiserId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'name' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortField' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortOrder' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'active' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+                'floodlightActivityId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+              ),
+            ),'patch' => array(
+              'path' => 'userprofiles/{profileId}/remarketingLists',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'update' => array(
+              'path' => 'userprofiles/{profileId}/remarketingLists',
+              'httpMethod' => 'PUT',
               'parameters' => array(
                 'profileId' => array(
                   'location' => 'path',
@@ -3686,6 +4260,70 @@ class Google_Service_Dfareporting extends Google_Service
           )
         )
     );
+    $this->targetableRemarketingLists = new Google_Service_Dfareporting_TargetableRemarketingLists_Resource(
+        $this,
+        $this->serviceName,
+        'targetableRemarketingLists',
+        array(
+          'methods' => array(
+            'get' => array(
+              'path' => 'userprofiles/{profileId}/targetableRemarketingLists/{id}',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'id' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'userprofiles/{profileId}/targetableRemarketingLists',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'profileId' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'advertiserId' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'name' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortField' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'maxResults' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'sortOrder' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'active' => array(
+                  'location' => 'query',
+                  'type' => 'boolean',
+                ),
+              ),
+            ),
+          )
+        )
+    );
     $this->userProfiles = new Google_Service_Dfareporting_UserProfiles_Resource(
         $this,
         $this->serviceName,
@@ -4046,6 +4684,21 @@ class Google_Service_Dfareporting_AccountUserProfiles_Resource extends Google_Se
   }
 
   /**
+   * Inserts a new account user profile. (accountUserProfiles.insert)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param Google_AccountUserProfile $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_AccountUserProfile
+   */
+  public function insert($profileId, Google_Service_Dfareporting_AccountUserProfile $postBody, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('insert', array($params), "Google_Service_Dfareporting_AccountUserProfile");
+  }
+
+  /**
    * Retrieves a list of account user profiles, possibly filtered.
    * (accountUserProfiles.listAccountUserProfiles)
    *
@@ -4053,18 +4706,18 @@ class Google_Service_Dfareporting_AccountUserProfiles_Resource extends Google_Se
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name, ID or
-   * email. Wildcards (*) are allowed. For example, "user profile*2010" will
-   * return objects with names like "user profile June 2010", "user profile April
-   * 2010" or simply "user profile 2010". Most of the searches also add wildcards
+   * email. Wildcards (*) are allowed. For example, "user profile*2015" will
+   * return objects with names like "user profile June 2015", "user profile April
+   * 2015", or simply "user profile 2015". Most of the searches also add wildcards
    * implicitly at the start and the end of the search string. For example, a
    * search string of "user profile" will match objects with name "my user
-   * profile", "user profile 2010" or simply "user profile".
+   * profile", "user profile 2015", or simply "user profile".
    * @opt_param string subaccountId Select only user profiles with the specified
    * subaccount ID.
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string ids Select only user profiles with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string userRoleId Select only user profiles with the specified
    * user role ID.
@@ -4145,15 +4798,15 @@ class Google_Service_Dfareporting_Accounts_Resource extends Google_Service_Resou
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "account*2010" will return objects
-   * with names like "account June 2010", "account April 2010" or simply "account
-   * 2010". Most of the searches also add wildcards implicitly at the start and
+   * Wildcards (*) are allowed. For example, "account*2015" will return objects
+   * with names like "account June 2015", "account April 2015", or simply "account
+   * 2015". Most of the searches also add wildcards implicitly at the start and
    * the end of the search string. For example, a search string of "account" will
-   * match objects with name "my account", "account 2010" or simply "account".
-   * @opt_param string sortField The field by which to sort the list.
+   * match objects with name "my account", "account 2015", or simply "account".
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string ids Select only accounts with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param bool active Select only active accounts. Don't set this field to
@@ -4254,43 +4907,44 @@ class Google_Service_Dfareporting_Ads_Resource extends Google_Service_Resource
    * @opt_param bool archived Select only archived ads.
    * @opt_param string creativeOptimizationConfigurationIds Select only ads with
    * these creative optimization configuration IDs.
-   * @opt_param bool sslCompliant Select only ads that are ssl compliant.
+   * @opt_param bool sslCompliant Select only ads that are SSL-compliant.
    * @opt_param string sizeIds Select only ads with these size IDs.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string type Select only ads with these types.
-   * @opt_param bool sslRequired Select only ads that require ssl.
+   * @opt_param bool sslRequired Select only ads that require SSL.
    * @opt_param string creativeIds Select only ads with these creative IDs
    * assigned.
    * @opt_param int maxResults Maximum number of results to return.
    * @opt_param string creativeType Select only ads with the specified
-   * CreativeType.
+   * creativeType.
    * @opt_param string placementIds Select only ads with these placement IDs
    * assigned.
    * @opt_param bool active Select only active ads.
-   * @opt_param string compatibility Applicable when type is
-   * AD_SERVING_DEFAULT_AD. Select default ads with the specified compatibility.
-   * WEB and WEB_INTERSTITIAL refer to rendering either on desktop or on mobile
-   * devices for regular or interstitial ads respectively. APP and
-   * APP_INTERSTITIAL are for rendering in mobile apps. IN_STREAM_VIDEO refers to
-   * rendering in in-stream video ads developed with the VAST standard.
+   * @opt_param string compatibility Select default ads with the specified
+   * compatibility. Applicable when type is AD_SERVING_DEFAULT_AD. WEB and
+   * WEB_INTERSTITIAL refer to rendering either on desktop or on mobile devices
+   * for regular or interstitial ads, respectively. APP and APP_INTERSTITIAL are
+   * for rendering in mobile apps. IN_STREAM_VIDEO refers to rendering an in-
+   * stream video ads developed with the VAST standard.
    * @opt_param string advertiserId Select only ads with this advertiser ID.
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "ad*2010" will return objects with
-   * names like "ad June 2010", "ad April 2010" or simply "ad 2010". Most of the
+   * Wildcards (*) are allowed. For example, "ad*2015" will return objects with
+   * names like "ad June 2015", "ad April 2015", or simply "ad 2015". Most of the
    * searches also add wildcards implicitly at the start and the end of the search
    * string. For example, a search string of "ad" will match objects with name "my
-   * ad", "ad 2010" or simply "ad".
-   * @opt_param string sortField The field by which to sort the list.
+   * ad", "ad 2015", or simply "ad".
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string audienceSegmentIds Select only ads with these audience
    * segment IDs.
    * @opt_param string ids Select only ads with these IDs.
    * @opt_param string remarketingListIds Select only ads whose list targeting
    * expression use these remarketing list IDs.
-   * @opt_param bool dynamicClickTracker Applicable when type is
-   * AD_SERVING_CLICK_TRACKER. If true, select dynamic click trackers. If false,
-   * select static click trackers. Leave unset to select both.
+   * @opt_param bool dynamicClickTracker Select only dynamic click trackers.
+   * Applicable when type is AD_SERVING_CLICK_TRACKER. If true, select dynamic
+   * click trackers. If false, select static click trackers. Leave unset to select
+   * both.
    * @return Google_Service_Dfareporting_AdsListResponse
    */
   public function listAds($profileId, $optParams = array())
@@ -4395,16 +5049,16 @@ class Google_Service_Dfareporting_AdvertiserGroups_Resource extends Google_Servi
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "advertiser*2010" will return objects
-   * with names like "advertiser group June 2010", "advertiser group April 2010"
-   * or simply "advertiser group 2010". Most of the searches also add wildcards
+   * Wildcards (*) are allowed. For example, "advertiser*2015" will return objects
+   * with names like "advertiser group June 2015", "advertiser group April 2015",
+   * or simply "advertiser group 2015". Most of the searches also add wildcards
    * implicitly at the start and the end of the search string. For example, a
    * search string of "advertisergroup" will match objects with name "my
-   * advertisergroup", "advertisergroup 2010" or simply "advertisergroup".
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string ids Set of IDs of specified advertiser groups to retrieve.
+   * advertisergroup", "advertisergroup 2015", or simply "advertisergroup".
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string ids Select only advertiser groups with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @return Google_Service_Dfareporting_AdvertiserGroupsListResponse
@@ -4497,29 +5151,30 @@ class Google_Service_Dfareporting_Advertisers_Resource extends Google_Service_Re
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string status Specifies the status of retrieved advertisers.
+   * @opt_param string status Select only advertisers with the specified status.
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "advertiser*2010" will return objects
-   * with names like "advertiser June 2010", "advertiser April 2010" or simply
-   * "advertiser 2010". Most of the searches also add wildcards implicitly at the
+   * Wildcards (*) are allowed. For example, "advertiser*2015" will return objects
+   * with names like "advertiser June 2015", "advertiser April 2015", or simply
+   * "advertiser 2015". Most of the searches also add wildcards implicitly at the
    * start and the end of the search string. For example, a search string of
-   * "advertiser" will match objects with name "my advertiser", "advertiser 2010"
+   * "advertiser" will match objects with name "my advertiser", "advertiser 2015",
    * or simply "advertiser".
-   * @opt_param string subaccountId Subaccount ID of advertisers to retrieve.
-   * @opt_param bool includeAdvertisersWithoutGroupsOnly If true, will return only
-   * advertisers which do not belong to any advertiser group.
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string ids Set of IDs of specified advertisers to retrieve.
+   * @opt_param string subaccountId Select only advertisers with these subaccount
+   * IDs.
+   * @opt_param bool includeAdvertisersWithoutGroupsOnly Select only advertisers
+   * which do not belong to any advertiser group.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string ids Select only advertisers with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
-   * @opt_param bool onlyParent If true, will return only advertisers which use
-   * another advertiser's floodlight configuration.
+   * @opt_param bool onlyParent Select only advertisers which use another
+   * advertiser's floodlight configuration.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @opt_param string floodlightConfigurationIds Set of floodlight configuration
-   * IDs of advertisers to retrieve.
-   * @opt_param string advertiserGroupIds Set of advertiser group IDs of
-   * advertisers to retrieve.
+   * @opt_param string floodlightConfigurationIds Select only advertisers with
+   * these floodlight configuration IDs.
+   * @opt_param string advertiserGroupIds Select only advertisers with these
+   * advertiser group IDs.
    * @return Google_Service_Dfareporting_AdvertisersListResponse
    */
   public function listAdvertisers($profileId, $optParams = array())
@@ -4600,9 +5255,9 @@ class Google_Service_Dfareporting_CampaignCreativeAssociations_Resource extends 
 {
 
   /**
-   * Associates a creative with this campaign. This method creates a default ad
-   * with dimensions matching the creative in this campaign if such a default ad
-   * does not exist already. (campaignCreativeAssociations.insert)
+   * Associates a creative with the specified campaign. This method creates a
+   * default ad with dimensions matching the creative in the campaign if such a
+   * default ad does not exist already. (campaignCreativeAssociations.insert)
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $campaignId Campaign ID in this association.
@@ -4618,14 +5273,14 @@ class Google_Service_Dfareporting_CampaignCreativeAssociations_Resource extends 
   }
 
   /**
-   * Retrieves the list of creative IDs associated with this campaign.
+   * Retrieves the list of creative IDs associated with the specified campaign.
    * (campaignCreativeAssociations.listCampaignCreativeAssociations)
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $campaignId Campaign ID in this association.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param int maxResults Maximum number of results to return.
@@ -4670,7 +5325,7 @@ class Google_Service_Dfareporting_Campaigns_Resource extends Google_Service_Reso
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $defaultLandingPageName Default landing page name for this new
-   * campaign.
+   * campaign. Must be less than 256 characters long.
    * @param string $defaultLandingPageUrl Default landing page URL for this new
    * campaign.
    * @param Google_Campaign $postBody
@@ -4693,21 +5348,21 @@ class Google_Service_Dfareporting_Campaigns_Resource extends Google_Service_Reso
    * @opt_param bool archived Select only archived campaigns. Don't set this field
    * to select both archived and non-archived campaigns.
    * @opt_param string searchString Allows searching for campaigns by name or ID.
-   * Wildcards (*) are allowed. For example, "campaign*2010" will return campaigns
-   * with names like "campaign June 2010", "campaign April 2010" or simply
-   * "campaign 2010". Most of the searches also add wildcards implicitly at the
+   * Wildcards (*) are allowed. For example, "campaign*2015" will return campaigns
+   * with names like "campaign June 2015", "campaign April 2015", or simply
+   * "campaign 2015". Most of the searches also add wildcards implicitly at the
    * start and the end of the search string. For example, a search string of
-   * "campaign" will match campaigns with name "my campaign", "campaign 2010" or
+   * "campaign" will match campaigns with name "my campaign", "campaign 2015", or
    * simply "campaign".
    * @opt_param string subaccountId Select only campaigns that belong to this
    * subaccount.
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string advertiserIds Select only campaigns that belong to these
    * advertisers.
    * @opt_param string ids Select only campaigns with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
    * @opt_param string excludedIds Exclude campaigns with these IDs.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string advertiserGroupIds Select only campaigns whose advertisers
    * belong to these advertiser groups.
@@ -4792,16 +5447,16 @@ class Google_Service_Dfareporting_ChangeLogs_Resource extends Google_Service_Res
    *
    * @opt_param string minChangeTime Select only change logs whose change time is
    * before the specified minChangeTime.The time should be formatted as an RFC3339
-   * date/time string. For example, for 10:54 PM on July 18th, 2014, in the
-   * America/New York time zone, the format is "2014-07-18T22:54:00-04:00". In
+   * date/time string. For example, for 10:54 PM on July 18th, 2015, in the
+   * America/New York time zone, the format is "2015-07-18T22:54:00-04:00". In
    * other words, the year, month, day, the letter T, the hour (24-hour clock
    * system), minute, second, and then the time zone offset.
    * @opt_param string searchString Select only change logs whose object ID, user
    * name, old or new values match the search string.
    * @opt_param string maxChangeTime Select only change logs whose change time is
    * before the specified maxChangeTime.The time should be formatted as an RFC3339
-   * date/time string. For example, for 10:54 PM on July 18th, 2014, in the
-   * America/New York time zone, the format is "2014-07-18T22:54:00-04:00". In
+   * date/time string. For example, for 10:54 PM on July 18th, 2015, in the
+   * America/New York time zone, the format is "2015-07-18T22:54:00-04:00". In
    * other words, the year, month, day, the letter T, the hour (24-hour clock
    * system), minute, second, and then the time zone offset.
    * @opt_param string userProfileIds Select only change logs with these user
@@ -4809,7 +5464,7 @@ class Google_Service_Dfareporting_ChangeLogs_Resource extends Google_Service_Res
    * @opt_param string ids Select only change logs with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
    * @opt_param string objectIds Select only change logs with these object IDs.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string action Select only change logs with the specified action.
    * @opt_param string objectType Select only change logs with the specified
@@ -4841,11 +5496,11 @@ class Google_Service_Dfareporting_Cities_Resource extends Google_Service_Resourc
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string dartIds Return cities with these IDs.
-   * @opt_param string namePrefix Select cities with names starting with this
+   * @opt_param string dartIds Select only cities with these DART IDs.
+   * @opt_param string namePrefix Select only cities with names starting with this
    * prefix.
-   * @opt_param string regionDartIds Select cities from these regions.
-   * @opt_param string countryDartIds Select cities from these countries.
+   * @opt_param string regionDartIds Select only cities from these regions.
+   * @opt_param string countryDartIds Select only cities from these countries.
    * @return Google_Service_Dfareporting_CitiesListResponse
    */
   public function listCities($profileId, $optParams = array())
@@ -4866,6 +5521,21 @@ class Google_Service_Dfareporting_Cities_Resource extends Google_Service_Resourc
  */
 class Google_Service_Dfareporting_ConnectionTypes_Resource extends Google_Service_Resource
 {
+
+  /**
+   * Gets one connection type by ID. (connectionTypes.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $id Connection type ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_ConnectionType
+   */
+  public function get($profileId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_ConnectionType");
+  }
 
   /**
    * Retrieves a list of connection types. (connectionTypes.listConnectionTypes)
@@ -4945,16 +5615,16 @@ class Google_Service_Dfareporting_ContentCategories_Resource extends Google_Serv
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "contentcategory*2010" will return
-   * objects with names like "contentcategory June 2010", "contentcategory April
-   * 2010" or simply "contentcategory 2010". Most of the searches also add
+   * Wildcards (*) are allowed. For example, "contentcategory*2015" will return
+   * objects with names like "contentcategory June 2015", "contentcategory April
+   * 2015", or simply "contentcategory 2015". Most of the searches also add
    * wildcards implicitly at the start and the end of the search string. For
    * example, a search string of "contentcategory" will match objects with name
-   * "my contentcategory", "contentcategory 2010" or simply "contentcategory".
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string ids Set of IDs of specified content categories to retrieve.
+   * "my contentcategory", "contentcategory 2015", or simply "contentcategory".
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string ids Select only content categories with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @return Google_Service_Dfareporting_ContentCategoriesListResponse
@@ -5141,9 +5811,9 @@ class Google_Service_Dfareporting_CreativeFieldValues_Resource extends Google_Se
    *
    * @opt_param string searchString Allows searching for creative field values by
    * their values. Wildcards (e.g. *) are not allowed.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string ids Select only creative field values with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
@@ -5256,19 +5926,19 @@ class Google_Service_Dfareporting_CreativeFields_Resource extends Google_Service
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for creative fields by name
-   * or ID. Wildcards (*) are allowed. For example, "creativefield*2010" will
-   * return creative fields with names like "creativefield June 2010",
-   * "creativefield April 2010" or simply "creativefield 2010". Most of the
+   * or ID. Wildcards (*) are allowed. For example, "creativefield*2015" will
+   * return creative fields with names like "creativefield June 2015",
+   * "creativefield April 2015", or simply "creativefield 2015". Most of the
    * searches also add wild-cards implicitly at the start and the end of the
    * search string. For example, a search string of "creativefield" will match
-   * creative fields with the name "my creativefield", "creativefield 2010" or
+   * creative fields with the name "my creativefield", "creativefield 2015", or
    * simply "creativefield".
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string advertiserIds Select only creative fields that belong to
    * these advertisers.
    * @opt_param string ids Select only creative fields with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @return Google_Service_Dfareporting_CreativeFieldsListResponse
@@ -5362,21 +6032,21 @@ class Google_Service_Dfareporting_CreativeGroups_Resource extends Google_Service
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for creative groups by name
-   * or ID. Wildcards (*) are allowed. For example, "creativegroup*2010" will
-   * return creative groups with names like "creativegroup June 2010",
-   * "creativegroup April 2010" or simply "creativegroup 2010". Most of the
+   * or ID. Wildcards (*) are allowed. For example, "creativegroup*2015" will
+   * return creative groups with names like "creativegroup June 2015",
+   * "creativegroup April 2015", or simply "creativegroup 2015". Most of the
    * searches also add wild-cards implicitly at the start and the end of the
    * search string. For example, a search string of "creativegroup" will match
-   * creative groups with the name "my creativegroup", "creativegroup 2010" or
+   * creative groups with the name "my creativegroup", "creativegroup 2015", or
    * simply "creativegroup".
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string advertiserIds Select only creative groups that belong to
    * these advertisers.
    * @opt_param int groupNumber Select only creative groups that belong to this
    * subgroup.
    * @opt_param int maxResults Maximum number of results to return.
    * @opt_param string ids Select only creative groups with these IDs.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @return Google_Service_Dfareporting_CreativeGroupsListResponse
@@ -5468,36 +6138,35 @@ class Google_Service_Dfareporting_Creatives_Resource extends Google_Service_Reso
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string sizeIds Select only creatives with specified size.
+   * @opt_param string sizeIds Select only creatives with these size IDs.
    * @opt_param bool archived Select only archived creatives. Leave blank to
    * select archived and unarchived creatives.
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "creative*2010" will return objects
-   * with names like "creative June 2010", "creative April 2010" or simply
-   * "creative 2010". Most of the searches also add wildcards implicitly at the
+   * Wildcards (*) are allowed. For example, "creative*2015" will return objects
+   * with names like "creative June 2015", "creative April 2015", or simply
+   * "creative 2015". Most of the searches also add wildcards implicitly at the
    * start and the end of the search string. For example, a search string of
-   * "creative" will match objects with name "my creative", "creative 2010" or
+   * "creative" will match objects with name "my creative", "creative 2015", or
    * simply "creative".
-   * @opt_param string campaignId Campaign ID of creatives to retrieve.
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string renderingIds Select only creatives with specified rendering
+   * @opt_param string campaignId Select only creatives with this campaign ID.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string renderingIds Select only creatives with these rendering
    * IDs.
-   * @opt_param string ids List of creative IDs.
+   * @opt_param string ids Select only creatives with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string advertiserId Advertiser ID.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string advertiserId Select only creatives with this advertiser ID.
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
-   * @opt_param string studioCreativeId Studio creative ID associated with DCM
-   * creatives.
+   * @opt_param string studioCreativeId Select only creatives corresponding to
+   * this Studio creative ID.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string companionCreativeIds Select only in-stream video creatives
-   * with specified companion IDs.
+   * with these companion IDs.
    * @opt_param bool active Select only active creatives. Leave blank to select
    * active and inactive creatives.
-   * @opt_param string creativeFieldIds Select only creatives with specified
-   * creative field IDs.
-   * @opt_param string types Select only creatives with specified type of
-   * creative.
+   * @opt_param string creativeFieldIds Select only creatives with these creative
+   * field IDs.
+   * @opt_param string types Select only creatives with these creative types.
    * @return Google_Service_Dfareporting_CreativesListResponse
    */
   public function listCreatives($profileId, $optParams = array())
@@ -5606,20 +6275,19 @@ class Google_Service_Dfareporting_DirectorySiteContacts_Resource extends Google_
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name, ID or
-   * email. Wildcards (*) are allowed. For example, "directory site contact*2010"
-   * will return objects with names like "directory site contact June 2010",
-   * "directory site contact April 2010" or simply "directory site contact 2010".
+   * email. Wildcards (*) are allowed. For example, "directory site contact*2015"
+   * will return objects with names like "directory site contact June 2015",
+   * "directory site contact April 2015", or simply "directory site contact 2015".
    * Most of the searches also add wildcards implicitly at the start and the end
    * of the search string. For example, a search string of "directory site
    * contact" will match objects with name "my directory site contact", "directory
-   * site contact 2010" or simply "directory site contact".
-   * @opt_param string directorySiteIds Retrieve contacts of directory sites with
-   * this set of IDs. This is a required field.
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string ids Set of IDs of specified directory site contacts to
-   * retrieve.
+   * site contact 2015", or simply "directory site contact".
+   * @opt_param string directorySiteIds Select only directory site contacts with
+   * these directory site IDs. This is a required field.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string ids Select only directory site contacts with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @return Google_Service_Dfareporting_DirectorySiteContactsListResponse
@@ -5659,37 +6327,52 @@ class Google_Service_Dfareporting_DirectorySites_Resource extends Google_Service
   }
 
   /**
+   * Inserts a new directory site. (directorySites.insert)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param Google_DirectorySite $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_DirectorySite
+   */
+  public function insert($profileId, Google_Service_Dfareporting_DirectorySite $postBody, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('insert', array($params), "Google_Service_Dfareporting_DirectorySite");
+  }
+
+  /**
    * Retrieves a list of directory sites, possibly filtered.
    * (directorySites.listDirectorySites)
    *
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool acceptsInterstitialPlacements Select only sites that accept
-   * interstitial placements. This field be left blank.
+   * @opt_param bool acceptsInterstitialPlacements This search filter is no longer
+   * supported and will have no effect on the results returned.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string searchString Allows searching for objects by name, ID or
-   * URL. Wildcards (*) are allowed. For example, "directory site*2010" will
-   * return objects with names like "directory site June 2010", "directory site
-   * April 2010" or simply "directory site 2010". Most of the searches also add
+   * URL. Wildcards (*) are allowed. For example, "directory site*2015" will
+   * return objects with names like "directory site June 2015", "directory site
+   * April 2015", or simply "directory site 2015". Most of the searches also add
    * wildcards implicitly at the start and the end of the search string. For
    * example, a search string of "directory site" will match objects with name "my
-   * directory site", "directory site 2010" or simply "directory site".
-   * @opt_param string countryId Country ID of directory sites to retrieve.
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param bool acceptsInStreamVideoPlacements Select only sites that accept
-   * in-stream video placements. This field can be left blank.
-   * @opt_param string ids Set of IDs of specified directory sites to retrieve.
+   * directory site", "directory site 2015" or simply, "directory site".
+   * @opt_param string countryId Select only directory sites with this country ID.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param bool acceptsInStreamVideoPlacements This search filter is no
+   * longer supported and will have no effect on the results returned.
+   * @opt_param string ids Select only directory sites with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param bool acceptsPublisherPaidPlacements Select only directory sites
    * that accept publisher paid placements. This field can be left blank.
-   * @opt_param string parentId Parent ID of directory sites to retrieve.
-   * @opt_param bool active Whether to retrieve active directory sites. Leave
-   * blank to retrieve both active and inactive directory sites.
-   * @opt_param string dfp_network_code DFP network code of directory sites to
-   * retrieve.
+   * @opt_param string parentId Select only directory sites with this parent ID.
+   * @opt_param bool active Select only active directory sites. Leave blank to
+   * retrieve both active and inactive directory sites.
+   * @opt_param string dfp_network_code Select only directory sites with this DFP
+   * network code.
    * @return Google_Service_Dfareporting_DirectorySitesListResponse
    */
   public function listDirectorySites($profileId, $optParams = array())
@@ -5762,21 +6445,21 @@ class Google_Service_Dfareporting_EventTags_Resource extends Google_Service_Reso
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "eventtag*2010" will return objects
-   * with names like "eventtag June 2010", "eventtag April 2010" or simply
-   * "eventtag 2010". Most of the searches also add wildcards implicitly at the
+   * Wildcards (*) are allowed. For example, "eventtag*2015" will return objects
+   * with names like "eventtag June 2015", "eventtag April 2015", or simply
+   * "eventtag 2015". Most of the searches also add wildcards implicitly at the
    * start and the end of the search string. For example, a search string of
-   * "eventtag" will match objects with name "my eventtag", "eventtag 2010" or
+   * "eventtag" will match objects with name "my eventtag", "eventtag 2015", or
    * simply "eventtag".
    * @opt_param string campaignId Select only event tags that belong to this
    * campaign.
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param bool enabled Select only enabled event tags. When definitionsOnly
    * is set to true, only the specified advertiser or campaign's event tags'
    * enabledByDefault field is examined. When definitionsOnly is set to false, the
    * specified ad or specified campaign's parent advertiser's or parent campaign's
    * event tags' enabledByDefault and status fields are examined as well.
-   * @opt_param string ids Set of IDs of specified event tags to retrieve.
+   * @opt_param string ids Select only event tags with these IDs.
    * @opt_param string advertiserId Select only event tags that belong to this
    * advertiser.
    * @opt_param string adId Select only event tags that belong to this ad.
@@ -5960,38 +6643,38 @@ class Google_Service_Dfareporting_FloodlightActivities_Resource extends Google_S
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string floodlightActivityGroupIds Retrieve Floodlight activities
-   * with the specified Floodlight activity group IDs.
+   * @opt_param string floodlightActivityGroupIds Select only floodlight
+   * activities with the specified floodlight activity group IDs.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "floodlightactivity*2010" will return
-   * objects with names like "floodlightactivity June 2010", "floodlightactivity
-   * April 2010" or simply "floodlightactivity 2010". Most of the searches also
+   * Wildcards (*) are allowed. For example, "floodlightactivity*2015" will return
+   * objects with names like "floodlightactivity June 2015", "floodlightactivity
+   * April 2015", or simply "floodlightactivity 2015". Most of the searches also
    * add wildcards implicitly at the start and the end of the search string. For
    * example, a search string of "floodlightactivity" will match objects with name
-   * "my floodlightactivity activity", "floodlightactivity 2010" or simply
+   * "my floodlightactivity activity", "floodlightactivity 2015", or simply
    * "floodlightactivity".
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string floodlightConfigurationId Retrieve Floodlight activities
-   * for the specified Floodlight configuration ID. Must specify either ids,
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string floodlightConfigurationId Select only floodlight activities
+   * for the specified floodlight configuration ID. Must specify either ids,
    * advertiserId, or floodlightConfigurationId for a non-empty result.
-   * @opt_param string ids Retrieve Floodlight activities with the specified IDs.
-   * Must specify either ids, advertiserId, or floodlightConfigurationId for a
-   * non-empty result.
-   * @opt_param string floodlightActivityGroupName Retrieve Floodlight activities
-   * with the specified Floodlight activity group name.
-   * @opt_param string advertiserId Retrieve Floodlight activities for the
+   * @opt_param string ids Select only floodlight activities with the specified
+   * IDs. Must specify either ids, advertiserId, or floodlightConfigurationId for
+   * a non-empty result.
+   * @opt_param string floodlightActivityGroupName Select only floodlight
+   * activities with the specified floodlight activity group name.
+   * @opt_param string advertiserId Select only floodlight activities for the
    * specified advertiser ID. Must specify either ids, advertiserId, or
    * floodlightConfigurationId for a non-empty result.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string tagString Retrieve Floodlight activities with the specified
-   * tag string.
-   * @opt_param string floodlightActivityGroupTagString Retrieve Floodlight
-   * activities with the specified Floodlight activity group tag string.
-   * @opt_param string floodlightActivityGroupType Retrieve Floodlight activities
-   * with the specified Floodlight activity group type.
+   * @opt_param string tagString Select only floodlight activities with the
+   * specified tag string.
+   * @opt_param string floodlightActivityGroupTagString Select only floodlight
+   * activities with the specified floodlight activity group tag string.
+   * @opt_param string floodlightActivityGroupType Select only floodlight
+   * activities with the specified floodlight activity group type.
    * @return Google_Service_Dfareporting_FloodlightActivitiesListResponse
    */
   public function listFloodlightActivities($profileId, $optParams = array())
@@ -6098,30 +6781,30 @@ class Google_Service_Dfareporting_FloodlightActivityGroups_Resource extends Goog
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "floodlightactivitygroup*2010" will
-   * return objects with names like "floodlightactivitygroup June 2010",
-   * "floodlightactivitygroup April 2010" or simply "floodlightactivitygroup
-   * 2010". Most of the searches also add wildcards implicitly at the start and
+   * Wildcards (*) are allowed. For example, "floodlightactivitygroup*2015" will
+   * return objects with names like "floodlightactivitygroup June 2015",
+   * "floodlightactivitygroup April 2015", or simply "floodlightactivitygroup
+   * 2015". Most of the searches also add wildcards implicitly at the start and
    * the end of the search string. For example, a search string of
    * "floodlightactivitygroup" will match objects with name "my
-   * floodlightactivitygroup activity", "floodlightactivitygroup 2010" or simply
+   * floodlightactivitygroup activity", "floodlightactivitygroup 2015", or simply
    * "floodlightactivitygroup".
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string floodlightConfigurationId Retrieve Floodlight activity
-   * groups with the specified Floodlight configuration ID. Must specify either
-   * ids, advertiserId, or floodlightConfigurationId for a non-empty result.
-   * @opt_param string ids Retrieve Floodlight activity groups with the specified
-   * IDs. Must specify either ids, advertiserId, or floodlightConfigurationId for
-   * a non-empty result.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string floodlightConfigurationId Select only floodlight activity
+   * groups with the specified floodlight configuration ID. Must specify either
+   * advertiserId, or floodlightConfigurationId for a non-empty result.
+   * @opt_param string ids Select only floodlight activity groups with the
+   * specified IDs. Must specify either advertiserId or floodlightConfigurationId
+   * for a non-empty result.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string advertiserId Retrieve Floodlight activity groups with the
-   * specified advertiser ID. Must specify either ids, advertiserId, or
+   * @opt_param string advertiserId Select only floodlight activity groups with
+   * the specified advertiser ID. Must specify either advertiserId or
    * floodlightConfigurationId for a non-empty result.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @opt_param string type Retrieve Floodlight activity groups with the specified
-   * Floodlight activity group type.
+   * @opt_param string type Select only floodlight activity groups with the
+   * specified floodlight activity group type.
    * @return Google_Service_Dfareporting_FloodlightActivityGroupsListResponse
    */
   public function listFloodlightActivityGroups($profileId, $optParams = array())
@@ -6244,6 +6927,62 @@ class Google_Service_Dfareporting_FloodlightConfigurations_Resource extends Goog
 }
 
 /**
+ * The "inventoryItems" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $inventoryItems = $dfareportingService->inventoryItems;
+ *  </code>
+ */
+class Google_Service_Dfareporting_InventoryItems_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Gets one inventory item by ID. (inventoryItems.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $projectId Project ID for order documents.
+   * @param string $id Inventory item ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_InventoryItem
+   */
+  public function get($profileId, $projectId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'projectId' => $projectId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_InventoryItem");
+  }
+
+  /**
+   * Retrieves a list of inventory items, possibly filtered.
+   * (inventoryItems.listInventoryItems)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $projectId Project ID for order documents.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string orderId Select only inventory items that belong to
+   * specified orders.
+   * @opt_param string ids Select only inventory items with these IDs.
+   * @opt_param int maxResults Maximum number of results to return.
+   * @opt_param string pageToken Value of the nextPageToken from the previous
+   * result page.
+   * @opt_param string siteId Select only inventory items that are associated with
+   * these sites.
+   * @opt_param bool inPlan Select only inventory items that are in plan.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
+   * @return Google_Service_Dfareporting_InventoryItemsListResponse
+   */
+  public function listInventoryItems($profileId, $projectId, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'projectId' => $projectId);
+    $params = array_merge($params, $optParams);
+    return $this->call('list', array($params), "Google_Service_Dfareporting_InventoryItemsListResponse");
+  }
+}
+
+/**
  * The "landingPages" collection of methods.
  * Typical usage is:
  *  <code>
@@ -6286,7 +7025,7 @@ class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_R
   }
 
   /**
-   * Inserts a new landing page for this campaign. (landingPages.insert)
+   * Inserts a new landing page for the specified campaign. (landingPages.insert)
    *
    * @param string $profileId User profile ID associated with this request.
    * @param string $campaignId Landing page campaign ID.
@@ -6302,7 +7041,7 @@ class Google_Service_Dfareporting_LandingPages_Resource extends Google_Service_R
   }
 
   /**
-   * Retrieves the list of landing pages for this campaign.
+   * Retrieves the list of landing pages for the specified campaign.
    * (landingPages.listLandingPages)
    *
    * @param string $profileId User profile ID associated with this request.
@@ -6390,6 +7129,21 @@ class Google_Service_Dfareporting_MobileCarriers_Resource extends Google_Service
 {
 
   /**
+   * Gets one mobile carrier by ID. (mobileCarriers.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $id Mobile carrier ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_MobileCarrier
+   */
+  public function get($profileId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_MobileCarrier");
+  }
+
+  /**
    * Retrieves a list of mobile carriers. (mobileCarriers.listMobileCarriers)
    *
    * @param string $profileId User profile ID associated with this request.
@@ -6414,6 +7168,21 @@ class Google_Service_Dfareporting_MobileCarriers_Resource extends Google_Service
  */
 class Google_Service_Dfareporting_OperatingSystemVersions_Resource extends Google_Service_Resource
 {
+
+  /**
+   * Gets one operating system version by ID. (operatingSystemVersions.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $id Operating system version ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_OperatingSystemVersion
+   */
+  public function get($profileId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_OperatingSystemVersion");
+  }
 
   /**
    * Retrieves a list of operating system versions.
@@ -6443,6 +7212,21 @@ class Google_Service_Dfareporting_OperatingSystems_Resource extends Google_Servi
 {
 
   /**
+   * Gets one operating system by DART ID. (operatingSystems.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $dartId Operating system DART ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_OperatingSystem
+   */
+  public function get($profileId, $dartId, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'dartId' => $dartId);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_OperatingSystem");
+  }
+
+  /**
    * Retrieves a list of operating systems.
    * (operatingSystems.listOperatingSystems)
    *
@@ -6455,6 +7239,128 @@ class Google_Service_Dfareporting_OperatingSystems_Resource extends Google_Servi
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_Dfareporting_OperatingSystemsListResponse");
+  }
+}
+
+/**
+ * The "orderDocuments" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $orderDocuments = $dfareportingService->orderDocuments;
+ *  </code>
+ */
+class Google_Service_Dfareporting_OrderDocuments_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Gets one order document by ID. (orderDocuments.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $projectId Project ID for order documents.
+   * @param string $id Order document ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_OrderDocument
+   */
+  public function get($profileId, $projectId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'projectId' => $projectId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_OrderDocument");
+  }
+
+  /**
+   * Retrieves a list of order documents, possibly filtered.
+   * (orderDocuments.listOrderDocuments)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $projectId Project ID for order documents.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string orderId Select only order documents for specified orders.
+   * @opt_param string searchString Allows searching for order documents by name
+   * or ID. Wildcards (*) are allowed. For example, "orderdocument*2015" will
+   * return order documents with names like "orderdocument June 2015",
+   * "orderdocument April 2015", or simply "orderdocument 2015". Most of the
+   * searches also add wildcards implicitly at the start and the end of the search
+   * string. For example, a search string of "orderdocument" will match order
+   * documents with name "my orderdocument", "orderdocument 2015", or simply
+   * "orderdocument".
+   * @opt_param string ids Select only order documents with these IDs.
+   * @opt_param int maxResults Maximum number of results to return.
+   * @opt_param string pageToken Value of the nextPageToken from the previous
+   * result page.
+   * @opt_param string siteId Select only order documents that are associated with
+   * these sites.
+   * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param bool approved Select only order documents that have been approved
+   * by at least one user.
+   * @return Google_Service_Dfareporting_OrderDocumentsListResponse
+   */
+  public function listOrderDocuments($profileId, $projectId, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'projectId' => $projectId);
+    $params = array_merge($params, $optParams);
+    return $this->call('list', array($params), "Google_Service_Dfareporting_OrderDocumentsListResponse");
+  }
+}
+
+/**
+ * The "orders" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $orders = $dfareportingService->orders;
+ *  </code>
+ */
+class Google_Service_Dfareporting_Orders_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Gets one order by ID. (orders.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $projectId Project ID for orders.
+   * @param string $id Order ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_Order
+   */
+  public function get($profileId, $projectId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'projectId' => $projectId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_Order");
+  }
+
+  /**
+   * Retrieves a list of orders, possibly filtered. (orders.listOrders)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $projectId Project ID for orders.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string searchString Allows searching for orders by name or ID.
+   * Wildcards (*) are allowed. For example, "order*2015" will return orders with
+   * names like "order June 2015", "order April 2015", or simply "order 2015".
+   * Most of the searches also add wildcards implicitly at the start and the end
+   * of the search string. For example, a search string of "order" will match
+   * orders with name "my order", "order 2015", or simply "order".
+   * @opt_param string ids Select only orders with these IDs.
+   * @opt_param int maxResults Maximum number of results to return.
+   * @opt_param string pageToken Value of the nextPageToken from the previous
+   * result page.
+   * @opt_param string siteId Select only orders that are associated with these
+   * site IDs.
+   * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
+   * @opt_param string sortField Field by which to sort the list.
+   * @return Google_Service_Dfareporting_OrdersListResponse
+   */
+  public function listOrders($profileId, $projectId, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'projectId' => $projectId);
+    $params = array_merge($params, $optParams);
+    return $this->call('list', array($params), "Google_Service_Dfareporting_OrdersListResponse");
   }
 }
 
@@ -6511,22 +7417,22 @@ class Google_Service_Dfareporting_PlacementGroups_Resource extends Google_Servic
    * @opt_param bool archived Select only archived placements. Don't set this
    * field to select both archived and non-archived placements.
    * @opt_param string searchString Allows searching for placement groups by name
-   * or ID. Wildcards (*) are allowed. For example, "placement*2010" will return
-   * placement groups with names like "placement group June 2010", "placement
-   * group May 2010" or simply "placements 2010". Most of the searches also add
+   * or ID. Wildcards (*) are allowed. For example, "placement*2015" will return
+   * placement groups with names like "placement group June 2015", "placement
+   * group May 2015", or simply "placements 2015". Most of the searches also add
    * wildcards implicitly at the start and the end of the search string. For
    * example, a search string of "placementgroup" will match placement groups with
-   * name "my placementgroup", "placementgroup 2010" or simply "placementgroup".
+   * name "my placementgroup", "placementgroup 2015", or simply "placementgroup".
    * @opt_param string contentCategoryIds Select only placement groups that are
    * associated with these content categories.
    * @opt_param string directorySiteIds Select only placement groups that are
    * associated with these directory sites.
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string advertiserIds Select only placement groups that belong to
    * these advertisers.
    * @opt_param string ids Select only placement groups with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string placementGroupType Select only placement groups belonging
@@ -6646,18 +7552,17 @@ class Google_Service_Dfareporting_PlacementStrategies_Resource extends Google_Se
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "placementstrategy*2010" will return
-   * objects with names like "placementstrategy June 2010", "placementstrategy
-   * April 2010" or simply "placementstrategy 2010". Most of the searches also add
-   * wildcards implicitly at the start and the end of the search string. For
+   * Wildcards (*) are allowed. For example, "placementstrategy*2015" will return
+   * objects with names like "placementstrategy June 2015", "placementstrategy
+   * April 2015", or simply "placementstrategy 2015". Most of the searches also
+   * add wildcards implicitly at the start and the end of the search string. For
    * example, a search string of "placementstrategy" will match objects with name
-   * "my placementstrategy", "placementstrategy 2010" or simply
+   * "my placementstrategy", "placementstrategy 2015", or simply
    * "placementstrategy".
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string ids Set of IDs of specified placement strategies to
-   * retrieve.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string ids Select only placement strategies with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @return Google_Service_Dfareporting_PlacementStrategiesListResponse
@@ -6775,17 +7680,17 @@ class Google_Service_Dfareporting_Placements_Resource extends Google_Service_Res
    * @opt_param bool archived Select only archived placements. Don't set this
    * field to select both archived and non-archived placements.
    * @opt_param string searchString Allows searching for placements by name or ID.
-   * Wildcards (*) are allowed. For example, "placement*2010" will return
-   * placements with names like "placement June 2010", "placement May 2010" or
-   * simply "placements 2010". Most of the searches also add wildcards implicitly
+   * Wildcards (*) are allowed. For example, "placement*2015" will return
+   * placements with names like "placement June 2015", "placement May 2015", or
+   * simply "placements 2015". Most of the searches also add wildcards implicitly
    * at the start and the end of the search string. For example, a search string
    * of "placement" will match placements with name "my placement", "placement
-   * 2010" or simply "placement".
+   * 2015", or simply "placement".
    * @opt_param string contentCategoryIds Select only placements that are
    * associated with these content categories.
    * @opt_param string directorySiteIds Select only placements that are associated
    * with these directory sites.
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param string advertiserIds Select only placements that belong to these
    * advertisers.
    * @opt_param string paymentSource Select only placements with this payment
@@ -6794,7 +7699,7 @@ class Google_Service_Dfareporting_Placements_Resource extends Google_Service_Res
    * @opt_param int maxResults Maximum number of results to return.
    * @opt_param string sizeIds Select only placements that are associated with
    * these sizes.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string compatibilities Select only placements that are associated
    * with these compatibilities. WEB and WEB_INTERSTITIAL refer to rendering
@@ -6864,6 +7769,21 @@ class Google_Service_Dfareporting_PlatformTypes_Resource extends Google_Service_
 {
 
   /**
+   * Gets one platform type by ID. (platformTypes.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $id Platform type ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_PlatformType
+   */
+  public function get($profileId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_PlatformType");
+  }
+
+  /**
    * Retrieves a list of platform types. (platformTypes.listPlatformTypes)
    *
    * @param string $profileId User profile ID associated with this request.
@@ -6890,6 +7810,21 @@ class Google_Service_Dfareporting_PostalCodes_Resource extends Google_Service_Re
 {
 
   /**
+   * Gets one postal code by ID. (postalCodes.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $code Postal code ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_PostalCode
+   */
+  public function get($profileId, $code, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'code' => $code);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_PostalCode");
+  }
+
+  /**
    * Retrieves a list of postal codes. (postalCodes.listPostalCodes)
    *
    * @param string $profileId User profile ID associated with this request.
@@ -6901,6 +7836,62 @@ class Google_Service_Dfareporting_PostalCodes_Resource extends Google_Service_Re
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_Dfareporting_PostalCodesListResponse");
+  }
+}
+
+/**
+ * The "projects" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $projects = $dfareportingService->projects;
+ *  </code>
+ */
+class Google_Service_Dfareporting_Projects_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Gets one project by ID. (projects.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $id Project ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_Project
+   */
+  public function get($profileId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_Project");
+  }
+
+  /**
+   * Retrieves a list of projects, possibly filtered. (projects.listProjects)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string searchString Allows searching for projects by name or ID.
+   * Wildcards (*) are allowed. For example, "project*2015" will return projects
+   * with names like "project June 2015", "project April 2015", or simply "project
+   * 2015". Most of the searches also add wildcards implicitly at the start and
+   * the end of the search string. For example, a search string of "project" will
+   * match projects with name "my project", "project 2015", or simply "project".
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string advertiserIds Select only projects with these advertiser
+   * IDs.
+   * @opt_param string ids Select only projects with these IDs.
+   * @opt_param int maxResults Maximum number of results to return.
+   * @opt_param string pageToken Value of the nextPageToken from the previous
+   * result page.
+   * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
+   * @return Google_Service_Dfareporting_ProjectsListResponse
+   */
+  public function listProjects($profileId, $optParams = array())
+  {
+    $params = array('profileId' => $profileId);
+    $params = array_merge($params, $optParams);
+    return $this->call('list', array($params), "Google_Service_Dfareporting_ProjectsListResponse");
   }
 }
 
@@ -6927,6 +7918,173 @@ class Google_Service_Dfareporting_Regions_Resource extends Google_Service_Resour
     $params = array('profileId' => $profileId);
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_Dfareporting_RegionsListResponse");
+  }
+}
+
+/**
+ * The "remarketingListShares" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $remarketingListShares = $dfareportingService->remarketingListShares;
+ *  </code>
+ */
+class Google_Service_Dfareporting_RemarketingListShares_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Gets one remarketing list share by remarketing list ID.
+   * (remarketingListShares.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $remarketingListId Remarketing list ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_RemarketingListShare
+   */
+  public function get($profileId, $remarketingListId, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'remarketingListId' => $remarketingListId);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_RemarketingListShare");
+  }
+
+  /**
+   * Updates an existing remarketing list share. This method supports patch
+   * semantics. (remarketingListShares.patch)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $remarketingListId Remarketing list ID.
+   * @param Google_RemarketingListShare $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_RemarketingListShare
+   */
+  public function patch($profileId, $remarketingListId, Google_Service_Dfareporting_RemarketingListShare $postBody, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'remarketingListId' => $remarketingListId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('patch', array($params), "Google_Service_Dfareporting_RemarketingListShare");
+  }
+
+  /**
+   * Updates an existing remarketing list share. (remarketingListShares.update)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param Google_RemarketingListShare $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_RemarketingListShare
+   */
+  public function update($profileId, Google_Service_Dfareporting_RemarketingListShare $postBody, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('update', array($params), "Google_Service_Dfareporting_RemarketingListShare");
+  }
+}
+
+/**
+ * The "remarketingLists" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $remarketingLists = $dfareportingService->remarketingLists;
+ *  </code>
+ */
+class Google_Service_Dfareporting_RemarketingLists_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Gets one remarketing list by ID. (remarketingLists.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $id Remarketing list ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_RemarketingList
+   */
+  public function get($profileId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_RemarketingList");
+  }
+
+  /**
+   * Inserts a new remarketing list. (remarketingLists.insert)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param Google_RemarketingList $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_RemarketingList
+   */
+  public function insert($profileId, Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('insert', array($params), "Google_Service_Dfareporting_RemarketingList");
+  }
+
+  /**
+   * Retrieves a list of remarketing lists, possibly filtered.
+   * (remarketingLists.listRemarketingLists)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $advertiserId Select only remarketing lists owned by this
+   * advertiser.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string name Allows searching for objects by name or ID. Wildcards
+   * (*) are allowed. For example, "remarketing list*2015" will return objects
+   * with names like "remarketing list June 2015", "remarketing list April 2015",
+   * or simply "remarketing list 2015". Most of the searches also add wildcards
+   * implicitly at the start and the end of the search string. For example, a
+   * search string of "remarketing list" will match objects with name "my
+   * remarketing list", "remarketing list 2015", or simply "remarketing list".
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param int maxResults Maximum number of results to return.
+   * @opt_param string pageToken Value of the nextPageToken from the previous
+   * result page.
+   * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
+   * @opt_param bool active Select only active or only inactive remarketing lists.
+   * @opt_param string floodlightActivityId Select only remarketing lists that
+   * have this floodlight activity ID.
+   * @return Google_Service_Dfareporting_RemarketingListsListResponse
+   */
+  public function listRemarketingLists($profileId, $advertiserId, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'advertiserId' => $advertiserId);
+    $params = array_merge($params, $optParams);
+    return $this->call('list', array($params), "Google_Service_Dfareporting_RemarketingListsListResponse");
+  }
+
+  /**
+   * Updates an existing remarketing list. This method supports patch semantics.
+   * (remarketingLists.patch)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $id Remarketing list ID.
+   * @param Google_RemarketingList $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_RemarketingList
+   */
+  public function patch($profileId, $id, Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'id' => $id, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('patch', array($params), "Google_Service_Dfareporting_RemarketingList");
+  }
+
+  /**
+   * Updates an existing remarketing list. (remarketingLists.update)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param Google_RemarketingList $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_RemarketingList
+   */
+  public function update($profileId, Google_Service_Dfareporting_RemarketingList $postBody, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('update', array($params), "Google_Service_Dfareporting_RemarketingList");
   }
 }
 
@@ -7182,31 +8340,32 @@ class Google_Service_Dfareporting_Sites_Resource extends Google_Service_Resource
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool acceptsInterstitialPlacements Select only sites that accept
-   * interstitial placements.
+   * @opt_param bool acceptsInterstitialPlacements This search filter is no longer
+   * supported and will have no effect on the results returned.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @opt_param string searchString Allows searching for objects by name, ID or
-   * keyName. Wildcards (*) are allowed. For example, "site*2010" will return
-   * objects with names like "site June 2010", "site April 2010" or simply "site
-   * 2010". Most of the searches also add wildcards implicitly at the start and
+   * keyName. Wildcards (*) are allowed. For example, "site*2015" will return
+   * objects with names like "site June 2015", "site April 2015", or simply "site
+   * 2015". Most of the searches also add wildcards implicitly at the start and
    * the end of the search string. For example, a search string of "site" will
-   * match objects with name "my site", "site 2010" or simply "site".
-   * @opt_param string subaccountId Subaccount ID of sites to retrieve.
-   * @opt_param string directorySiteIds Directory site IDs of sites to retrieve.
-   * @opt_param bool acceptsInStreamVideoPlacements Select only sites that accept
-   * in-stream video placements.
-   * @opt_param string ids Set of IDs of specified sites to retrieve.
+   * match objects with name "my site", "site 2015", or simply "site".
+   * @opt_param string subaccountId Select only sites with this subaccount ID.
+   * @opt_param string directorySiteIds Select only sites with these directory
+   * site IDs.
+   * @opt_param bool acceptsInStreamVideoPlacements This search filter is no
+   * longer supported and will have no effect on the results returned.
+   * @opt_param string ids Select only sites with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param bool acceptsPublisherPaidPlacements Select only sites that accept
    * publisher paid placements.
-   * @opt_param string sortField The field by which to sort the list.
+   * @opt_param string sortField Field by which to sort the list.
    * @opt_param bool adWordsSite Select only AdWords sites.
    * @opt_param bool unmappedSite Select only sites that have not been mapped to a
    * directory site.
    * @opt_param bool approved Select only approved sites.
-   * @opt_param string campaignIds Campaign IDs of sites to retrieve.
+   * @opt_param string campaignIds Select only sites with these campaign IDs.
    * @return Google_Service_Dfareporting_SitesListResponse
    */
   public function listSites($profileId, $optParams = array())
@@ -7295,11 +8454,10 @@ class Google_Service_Dfareporting_Sizes_Resource extends Google_Service_Resource
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool iabStandard Whether only IAB standard sizes should be
-   * retrieved.
-   * @opt_param int width Width of sizes to retrieve.
-   * @opt_param string ids Set of IDs of specified sizes to retrieve.
-   * @opt_param int height Height of sizes to retrieve.
+   * @opt_param bool iabStandard Select only IAB standard sizes.
+   * @opt_param int width Select only sizes with this width.
+   * @opt_param string ids Select only sizes with these IDs.
+   * @opt_param int height Select only sizes with this height.
    * @return Google_Service_Dfareporting_SizesListResponse
    */
   public function listSizes($profileId, $optParams = array())
@@ -7358,16 +8516,16 @@ class Google_Service_Dfareporting_Subaccounts_Resource extends Google_Service_Re
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "subaccount*2010" will return objects
-   * with names like "subaccount June 2010", "subaccount April 2010" or simply
-   * "subaccount 2010". Most of the searches also add wildcards implicitly at the
+   * Wildcards (*) are allowed. For example, "subaccount*2015" will return objects
+   * with names like "subaccount June 2015", "subaccount April 2015", or simply
+   * "subaccount 2015". Most of the searches also add wildcards implicitly at the
    * start and the end of the search string. For example, a search string of
-   * "subaccount" will match objects with name "my subaccount", "subaccount 2010"
+   * "subaccount" will match objects with name "my subaccount", "subaccount 2015",
    * or simply "subaccount".
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string ids The set of IDs of the subaccounts to retrieve.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string ids Select only subaccounts with these IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
    * @return Google_Service_Dfareporting_SubaccountsListResponse
@@ -7409,6 +8567,65 @@ class Google_Service_Dfareporting_Subaccounts_Resource extends Google_Service_Re
     $params = array('profileId' => $profileId, 'postBody' => $postBody);
     $params = array_merge($params, $optParams);
     return $this->call('update', array($params), "Google_Service_Dfareporting_Subaccount");
+  }
+}
+
+/**
+ * The "targetableRemarketingLists" collection of methods.
+ * Typical usage is:
+ *  <code>
+ *   $dfareportingService = new Google_Service_Dfareporting(...);
+ *   $targetableRemarketingLists = $dfareportingService->targetableRemarketingLists;
+ *  </code>
+ */
+class Google_Service_Dfareporting_TargetableRemarketingLists_Resource extends Google_Service_Resource
+{
+
+  /**
+   * Gets one remarketing list by ID. (targetableRemarketingLists.get)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $id Remarketing list ID.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_Dfareporting_TargetableRemarketingList
+   */
+  public function get($profileId, $id, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'id' => $id);
+    $params = array_merge($params, $optParams);
+    return $this->call('get', array($params), "Google_Service_Dfareporting_TargetableRemarketingList");
+  }
+
+  /**
+   * Retrieves a list of targetable remarketing lists, possibly filtered.
+   * (targetableRemarketingLists.listTargetableRemarketingLists)
+   *
+   * @param string $profileId User profile ID associated with this request.
+   * @param string $advertiserId Select only targetable remarketing lists
+   * targetable by these advertisers.
+   * @param array $optParams Optional parameters.
+   *
+   * @opt_param string name Allows searching for objects by name or ID. Wildcards
+   * (*) are allowed. For example, "remarketing list*2015" will return objects
+   * with names like "remarketing list June 2015", "remarketing list April 2015",
+   * or simply "remarketing list 2015". Most of the searches also add wildcards
+   * implicitly at the start and the end of the search string. For example, a
+   * search string of "remarketing list" will match objects with name "my
+   * remarketing list", "remarketing list 2015", or simply "remarketing list".
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param int maxResults Maximum number of results to return.
+   * @opt_param string pageToken Value of the nextPageToken from the previous
+   * result page.
+   * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
+   * @opt_param bool active Select only active or only inactive targetable
+   * remarketing lists.
+   * @return Google_Service_Dfareporting_TargetableRemarketingListsListResponse
+   */
+  public function listTargetableRemarketingLists($profileId, $advertiserId, $optParams = array())
+  {
+    $params = array('profileId' => $profileId, 'advertiserId' => $advertiserId);
+    $params = array_merge($params, $optParams);
+    return $this->call('list', array($params), "Google_Service_Dfareporting_TargetableRemarketingListsListResponse");
   }
 }
 
@@ -7526,8 +8743,7 @@ class Google_Service_Dfareporting_UserRolePermissions_Resource extends Google_Se
    * @param string $profileId User profile ID associated with this request.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string ids Set of IDs of specified user role permissions to
-   * retrieve.
+   * @opt_param string ids Select only user role permissions with these IDs.
    * @return Google_Service_Dfareporting_UserRolePermissionsListResponse
    */
   public function listUserRolePermissions($profileId, $optParams = array())
@@ -7600,22 +8816,22 @@ class Google_Service_Dfareporting_UserRoles_Resource extends Google_Service_Reso
    * @param array $optParams Optional parameters.
    *
    * @opt_param string searchString Allows searching for objects by name or ID.
-   * Wildcards (*) are allowed. For example, "userrole*2010" will return objects
-   * with names like "userrole June 2010", "userrole April 2010" or simply
-   * "userrole 2010". Most of the searches also add wildcards implicitly at the
+   * Wildcards (*) are allowed. For example, "userrole*2015" will return objects
+   * with names like "userrole June 2015", "userrole April 2015", or simply
+   * "userrole 2015". Most of the searches also add wildcards implicitly at the
    * start and the end of the search string. For example, a search string of
-   * "userrole" will match objects with name "my userrole", "userrole 2010" or
+   * "userrole" will match objects with name "my userrole", "userrole 2015", or
    * simply "userrole".
    * @opt_param string subaccountId Select only user roles that belong to this
    * subaccount.
-   * @opt_param string sortField The field by which to sort the list.
-   * @opt_param string ids Set of IDs of specified user roles to retrieve.
+   * @opt_param string sortField Field by which to sort the list.
+   * @opt_param string ids Select only user roles with the specified IDs.
    * @opt_param int maxResults Maximum number of results to return.
-   * @opt_param string pageToken The value of the nextPageToken from the previous
+   * @opt_param string pageToken Value of the nextPageToken from the previous
    * result page.
    * @opt_param string sortOrder Order of sorted results, default is ASCENDING.
-   * @opt_param bool accountUserRoleOnly If true, select only account level user
-   * roles not associated with any specific subaccount.
+   * @opt_param bool accountUserRoleOnly Select only account level user roles not
+   * associated with any specific subaccount.
    * @return Google_Service_Dfareporting_UserRolesListResponse
    */
   public function listUserRoles($profileId, $optParams = array())
@@ -8678,6 +9894,86 @@ class Google_Service_Dfareporting_Ad extends Google_Collection
   }
 }
 
+class Google_Service_Dfareporting_AdSlot extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $comment;
+  public $compatibility;
+  public $height;
+  public $linkedPlacementId;
+  public $name;
+  public $paymentSourceType;
+  public $primary;
+  public $width;
+
+
+  public function setComment($comment)
+  {
+    $this->comment = $comment;
+  }
+  public function getComment()
+  {
+    return $this->comment;
+  }
+  public function setCompatibility($compatibility)
+  {
+    $this->compatibility = $compatibility;
+  }
+  public function getCompatibility()
+  {
+    return $this->compatibility;
+  }
+  public function setHeight($height)
+  {
+    $this->height = $height;
+  }
+  public function getHeight()
+  {
+    return $this->height;
+  }
+  public function setLinkedPlacementId($linkedPlacementId)
+  {
+    $this->linkedPlacementId = $linkedPlacementId;
+  }
+  public function getLinkedPlacementId()
+  {
+    return $this->linkedPlacementId;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setPaymentSourceType($paymentSourceType)
+  {
+    $this->paymentSourceType = $paymentSourceType;
+  }
+  public function getPaymentSourceType()
+  {
+    return $this->paymentSourceType;
+  }
+  public function setPrimary($primary)
+  {
+    $this->primary = $primary;
+  }
+  public function getPrimary()
+  {
+    return $this->primary;
+  }
+  public function setWidth($width)
+  {
+    $this->width = $width;
+  }
+  public function getWidth()
+  {
+    return $this->width;
+  }
+}
+
 class Google_Service_Dfareporting_AdsListResponse extends Google_Collection
 {
   protected $collection_key = 'ads';
@@ -8732,6 +10028,7 @@ class Google_Service_Dfareporting_Advertiser extends Google_Model
   protected $idDimensionValueDataType = '';
   public $kind;
   public $name;
+  public $originalFloodlightConfigurationId;
   public $status;
   public $subaccountId;
 
@@ -8823,6 +10120,14 @@ class Google_Service_Dfareporting_Advertiser extends Google_Model
   public function getName()
   {
     return $this->name;
+  }
+  public function setOriginalFloodlightConfigurationId($originalFloodlightConfigurationId)
+  {
+    $this->originalFloodlightConfigurationId = $originalFloodlightConfigurationId;
+  }
+  public function getOriginalFloodlightConfigurationId()
+  {
+    return $this->originalFloodlightConfigurationId;
   }
   public function setStatus($status)
   {
@@ -10077,7 +11382,6 @@ class Google_Service_Dfareporting_ContentCategory extends Google_Model
   protected $internal_gapi_mappings = array(
   );
   public $accountId;
-  public $description;
   public $id;
   public $kind;
   public $name;
@@ -10090,14 +11394,6 @@ class Google_Service_Dfareporting_ContentCategory extends Google_Model
   public function getAccountId()
   {
     return $this->accountId;
-  }
-  public function setDescription($description)
-  {
-    $this->description = $description;
-  }
-  public function getDescription()
-  {
-    return $this->description;
   }
   public function setId($id)
   {
@@ -10233,6 +11529,7 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   public $commercialId;
   public $companionCreatives;
   public $compatibility;
+  public $convertFlashToHtml5;
   protected $counterCustomEventsType = 'Google_Service_Dfareporting_CreativeCustomEvent';
   protected $counterCustomEventsDataType = 'array';
   protected $creativeAssetsType = 'Google_Service_Dfareporting_CreativeAsset';
@@ -10433,6 +11730,14 @@ class Google_Service_Dfareporting_Creative extends Google_Collection
   public function getCompatibility()
   {
     return $this->compatibility;
+  }
+  public function setConvertFlashToHtml5($convertFlashToHtml5)
+  {
+    $this->convertFlashToHtml5 = $convertFlashToHtml5;
+  }
+  public function getConvertFlashToHtml5()
+  {
+    return $this->convertFlashToHtml5;
   }
   public function setCounterCustomEvents($counterCustomEvents)
   {
@@ -12720,15 +14025,26 @@ class Google_Service_Dfareporting_DirectorySiteContact extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
+  public $address;
   public $email;
   public $firstName;
   public $id;
   public $kind;
   public $lastName;
+  public $phone;
   public $role;
+  public $title;
   public $type;
 
 
+  public function setAddress($address)
+  {
+    $this->address = $address;
+  }
+  public function getAddress()
+  {
+    return $this->address;
+  }
   public function setEmail($email)
   {
     $this->email = $email;
@@ -12769,6 +14085,14 @@ class Google_Service_Dfareporting_DirectorySiteContact extends Google_Model
   {
     return $this->lastName;
   }
+  public function setPhone($phone)
+  {
+    $this->phone = $phone;
+  }
+  public function getPhone()
+  {
+    return $this->phone;
+  }
   public function setRole($role)
   {
     $this->role = $role;
@@ -12776,6 +14100,14 @@ class Google_Service_Dfareporting_DirectorySiteContact extends Google_Model
   public function getRole()
   {
     return $this->role;
+  }
+  public function setTitle($title)
+  {
+    $this->title = $title;
+  }
+  public function getTitle()
+  {
+    return $this->title;
   }
   public function setType($type)
   {
@@ -13222,6 +14554,50 @@ class Google_Service_Dfareporting_FileList extends Google_Collection
   public function getNextPageToken()
   {
     return $this->nextPageToken;
+  }
+}
+
+class Google_Service_Dfareporting_Flight extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $endDate;
+  public $rateOrCost;
+  public $startDate;
+  public $units;
+
+
+  public function setEndDate($endDate)
+  {
+    $this->endDate = $endDate;
+  }
+  public function getEndDate()
+  {
+    return $this->endDate;
+  }
+  public function setRateOrCost($rateOrCost)
+  {
+    $this->rateOrCost = $rateOrCost;
+  }
+  public function getRateOrCost()
+  {
+    return $this->rateOrCost;
+  }
+  public function setStartDate($startDate)
+  {
+    $this->startDate = $startDate;
+  }
+  public function getStartDate()
+  {
+    return $this->startDate;
+  }
+  public function setUnits($units)
+  {
+    $this->units = $units;
+  }
+  public function getUnits()
+  {
+    return $this->units;
   }
 }
 
@@ -14200,6 +15576,226 @@ class Google_Service_Dfareporting_GeoTargeting extends Google_Collection
   }
 }
 
+class Google_Service_Dfareporting_InventoryItem extends Google_Collection
+{
+  protected $collection_key = 'adSlots';
+  protected $internal_gapi_mappings = array(
+  );
+  public $accountId;
+  protected $adSlotsType = 'Google_Service_Dfareporting_AdSlot';
+  protected $adSlotsDataType = 'array';
+  public $advertiserId;
+  public $contentCategoryId;
+  public $estimatedClickThroughRate;
+  public $estimatedConversionRate;
+  public $id;
+  public $inPlan;
+  public $kind;
+  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoDataType = '';
+  public $name;
+  public $negotiationChannelId;
+  public $orderId;
+  public $placementStrategyId;
+  protected $pricingType = 'Google_Service_Dfareporting_Pricing';
+  protected $pricingDataType = '';
+  public $projectId;
+  public $rfpId;
+  public $siteId;
+  public $subaccountId;
+
+
+  public function setAccountId($accountId)
+  {
+    $this->accountId = $accountId;
+  }
+  public function getAccountId()
+  {
+    return $this->accountId;
+  }
+  public function setAdSlots($adSlots)
+  {
+    $this->adSlots = $adSlots;
+  }
+  public function getAdSlots()
+  {
+    return $this->adSlots;
+  }
+  public function setAdvertiserId($advertiserId)
+  {
+    $this->advertiserId = $advertiserId;
+  }
+  public function getAdvertiserId()
+  {
+    return $this->advertiserId;
+  }
+  public function setContentCategoryId($contentCategoryId)
+  {
+    $this->contentCategoryId = $contentCategoryId;
+  }
+  public function getContentCategoryId()
+  {
+    return $this->contentCategoryId;
+  }
+  public function setEstimatedClickThroughRate($estimatedClickThroughRate)
+  {
+    $this->estimatedClickThroughRate = $estimatedClickThroughRate;
+  }
+  public function getEstimatedClickThroughRate()
+  {
+    return $this->estimatedClickThroughRate;
+  }
+  public function setEstimatedConversionRate($estimatedConversionRate)
+  {
+    $this->estimatedConversionRate = $estimatedConversionRate;
+  }
+  public function getEstimatedConversionRate()
+  {
+    return $this->estimatedConversionRate;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setInPlan($inPlan)
+  {
+    $this->inPlan = $inPlan;
+  }
+  public function getInPlan()
+  {
+    return $this->inPlan;
+  }
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  {
+    $this->lastModifiedInfo = $lastModifiedInfo;
+  }
+  public function getLastModifiedInfo()
+  {
+    return $this->lastModifiedInfo;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setNegotiationChannelId($negotiationChannelId)
+  {
+    $this->negotiationChannelId = $negotiationChannelId;
+  }
+  public function getNegotiationChannelId()
+  {
+    return $this->negotiationChannelId;
+  }
+  public function setOrderId($orderId)
+  {
+    $this->orderId = $orderId;
+  }
+  public function getOrderId()
+  {
+    return $this->orderId;
+  }
+  public function setPlacementStrategyId($placementStrategyId)
+  {
+    $this->placementStrategyId = $placementStrategyId;
+  }
+  public function getPlacementStrategyId()
+  {
+    return $this->placementStrategyId;
+  }
+  public function setPricing(Google_Service_Dfareporting_Pricing $pricing)
+  {
+    $this->pricing = $pricing;
+  }
+  public function getPricing()
+  {
+    return $this->pricing;
+  }
+  public function setProjectId($projectId)
+  {
+    $this->projectId = $projectId;
+  }
+  public function getProjectId()
+  {
+    return $this->projectId;
+  }
+  public function setRfpId($rfpId)
+  {
+    $this->rfpId = $rfpId;
+  }
+  public function getRfpId()
+  {
+    return $this->rfpId;
+  }
+  public function setSiteId($siteId)
+  {
+    $this->siteId = $siteId;
+  }
+  public function getSiteId()
+  {
+    return $this->siteId;
+  }
+  public function setSubaccountId($subaccountId)
+  {
+    $this->subaccountId = $subaccountId;
+  }
+  public function getSubaccountId()
+  {
+    return $this->subaccountId;
+  }
+}
+
+class Google_Service_Dfareporting_InventoryItemsListResponse extends Google_Collection
+{
+  protected $collection_key = 'inventoryItems';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $inventoryItemsType = 'Google_Service_Dfareporting_InventoryItem';
+  protected $inventoryItemsDataType = 'array';
+  public $kind;
+  public $nextPageToken;
+
+
+  public function setInventoryItems($inventoryItems)
+  {
+    $this->inventoryItems = $inventoryItems;
+  }
+  public function getInventoryItems()
+  {
+    return $this->inventoryItems;
+  }
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
+  }
+}
+
 class Google_Service_Dfareporting_KeyValueTargetingExpression extends Google_Model
 {
   protected $internal_gapi_mappings = array(
@@ -14312,6 +15908,142 @@ class Google_Service_Dfareporting_LastModifiedInfo extends Google_Model
   public function getTime()
   {
     return $this->time;
+  }
+}
+
+class Google_Service_Dfareporting_ListPopulationClause extends Google_Collection
+{
+  protected $collection_key = 'terms';
+  protected $internal_gapi_mappings = array(
+  );
+  protected $termsType = 'Google_Service_Dfareporting_ListPopulationTerm';
+  protected $termsDataType = 'array';
+
+
+  public function setTerms($terms)
+  {
+    $this->terms = $terms;
+  }
+  public function getTerms()
+  {
+    return $this->terms;
+  }
+}
+
+class Google_Service_Dfareporting_ListPopulationRule extends Google_Collection
+{
+  protected $collection_key = 'listPopulationClauses';
+  protected $internal_gapi_mappings = array(
+  );
+  public $floodlightActivityId;
+  public $floodlightActivityName;
+  protected $listPopulationClausesType = 'Google_Service_Dfareporting_ListPopulationClause';
+  protected $listPopulationClausesDataType = 'array';
+
+
+  public function setFloodlightActivityId($floodlightActivityId)
+  {
+    $this->floodlightActivityId = $floodlightActivityId;
+  }
+  public function getFloodlightActivityId()
+  {
+    return $this->floodlightActivityId;
+  }
+  public function setFloodlightActivityName($floodlightActivityName)
+  {
+    $this->floodlightActivityName = $floodlightActivityName;
+  }
+  public function getFloodlightActivityName()
+  {
+    return $this->floodlightActivityName;
+  }
+  public function setListPopulationClauses($listPopulationClauses)
+  {
+    $this->listPopulationClauses = $listPopulationClauses;
+  }
+  public function getListPopulationClauses()
+  {
+    return $this->listPopulationClauses;
+  }
+}
+
+class Google_Service_Dfareporting_ListPopulationTerm extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $contains;
+  public $negation;
+  public $operator;
+  public $remarketingListId;
+  public $type;
+  public $value;
+  public $variableFriendlyName;
+  public $variableName;
+
+
+  public function setContains($contains)
+  {
+    $this->contains = $contains;
+  }
+  public function getContains()
+  {
+    return $this->contains;
+  }
+  public function setNegation($negation)
+  {
+    $this->negation = $negation;
+  }
+  public function getNegation()
+  {
+    return $this->negation;
+  }
+  public function setOperator($operator)
+  {
+    $this->operator = $operator;
+  }
+  public function getOperator()
+  {
+    return $this->operator;
+  }
+  public function setRemarketingListId($remarketingListId)
+  {
+    $this->remarketingListId = $remarketingListId;
+  }
+  public function getRemarketingListId()
+  {
+    return $this->remarketingListId;
+  }
+  public function setType($type)
+  {
+    $this->type = $type;
+  }
+  public function getType()
+  {
+    return $this->type;
+  }
+  public function setValue($value)
+  {
+    $this->value = $value;
+  }
+  public function getValue()
+  {
+    return $this->value;
+  }
+  public function setVariableFriendlyName($variableFriendlyName)
+  {
+    $this->variableFriendlyName = $variableFriendlyName;
+  }
+  public function getVariableFriendlyName()
+  {
+    return $this->variableFriendlyName;
+  }
+  public function setVariableName($variableName)
+  {
+    $this->variableName = $variableName;
+  }
+  public function getVariableName()
+  {
+    return $this->variableName;
   }
 }
 
@@ -14857,6 +16589,469 @@ class Google_Service_Dfareporting_OptimizationActivity extends Google_Model
   public function getWeight()
   {
     return $this->weight;
+  }
+}
+
+class Google_Service_Dfareporting_Order extends Google_Collection
+{
+  protected $collection_key = 'siteNames';
+  protected $internal_gapi_mappings = array(
+  );
+  public $accountId;
+  public $advertiserId;
+  public $approverUserProfileIds;
+  public $buyerInvoiceId;
+  public $buyerOrganizationName;
+  public $comments;
+  protected $contactsType = 'Google_Service_Dfareporting_OrderContact';
+  protected $contactsDataType = 'array';
+  public $id;
+  public $kind;
+  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoDataType = '';
+  public $name;
+  public $notes;
+  public $planningTermId;
+  public $projectId;
+  public $sellerOrderId;
+  public $sellerOrganizationName;
+  public $siteId;
+  public $siteNames;
+  public $subaccountId;
+  public $termsAndConditions;
+
+
+  public function setAccountId($accountId)
+  {
+    $this->accountId = $accountId;
+  }
+  public function getAccountId()
+  {
+    return $this->accountId;
+  }
+  public function setAdvertiserId($advertiserId)
+  {
+    $this->advertiserId = $advertiserId;
+  }
+  public function getAdvertiserId()
+  {
+    return $this->advertiserId;
+  }
+  public function setApproverUserProfileIds($approverUserProfileIds)
+  {
+    $this->approverUserProfileIds = $approverUserProfileIds;
+  }
+  public function getApproverUserProfileIds()
+  {
+    return $this->approverUserProfileIds;
+  }
+  public function setBuyerInvoiceId($buyerInvoiceId)
+  {
+    $this->buyerInvoiceId = $buyerInvoiceId;
+  }
+  public function getBuyerInvoiceId()
+  {
+    return $this->buyerInvoiceId;
+  }
+  public function setBuyerOrganizationName($buyerOrganizationName)
+  {
+    $this->buyerOrganizationName = $buyerOrganizationName;
+  }
+  public function getBuyerOrganizationName()
+  {
+    return $this->buyerOrganizationName;
+  }
+  public function setComments($comments)
+  {
+    $this->comments = $comments;
+  }
+  public function getComments()
+  {
+    return $this->comments;
+  }
+  public function setContacts($contacts)
+  {
+    $this->contacts = $contacts;
+  }
+  public function getContacts()
+  {
+    return $this->contacts;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  {
+    $this->lastModifiedInfo = $lastModifiedInfo;
+  }
+  public function getLastModifiedInfo()
+  {
+    return $this->lastModifiedInfo;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setNotes($notes)
+  {
+    $this->notes = $notes;
+  }
+  public function getNotes()
+  {
+    return $this->notes;
+  }
+  public function setPlanningTermId($planningTermId)
+  {
+    $this->planningTermId = $planningTermId;
+  }
+  public function getPlanningTermId()
+  {
+    return $this->planningTermId;
+  }
+  public function setProjectId($projectId)
+  {
+    $this->projectId = $projectId;
+  }
+  public function getProjectId()
+  {
+    return $this->projectId;
+  }
+  public function setSellerOrderId($sellerOrderId)
+  {
+    $this->sellerOrderId = $sellerOrderId;
+  }
+  public function getSellerOrderId()
+  {
+    return $this->sellerOrderId;
+  }
+  public function setSellerOrganizationName($sellerOrganizationName)
+  {
+    $this->sellerOrganizationName = $sellerOrganizationName;
+  }
+  public function getSellerOrganizationName()
+  {
+    return $this->sellerOrganizationName;
+  }
+  public function setSiteId($siteId)
+  {
+    $this->siteId = $siteId;
+  }
+  public function getSiteId()
+  {
+    return $this->siteId;
+  }
+  public function setSiteNames($siteNames)
+  {
+    $this->siteNames = $siteNames;
+  }
+  public function getSiteNames()
+  {
+    return $this->siteNames;
+  }
+  public function setSubaccountId($subaccountId)
+  {
+    $this->subaccountId = $subaccountId;
+  }
+  public function getSubaccountId()
+  {
+    return $this->subaccountId;
+  }
+  public function setTermsAndConditions($termsAndConditions)
+  {
+    $this->termsAndConditions = $termsAndConditions;
+  }
+  public function getTermsAndConditions()
+  {
+    return $this->termsAndConditions;
+  }
+}
+
+class Google_Service_Dfareporting_OrderContact extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $contactInfo;
+  public $contactName;
+  public $contactTitle;
+  public $contactType;
+  public $signatureUserProfileId;
+
+
+  public function setContactInfo($contactInfo)
+  {
+    $this->contactInfo = $contactInfo;
+  }
+  public function getContactInfo()
+  {
+    return $this->contactInfo;
+  }
+  public function setContactName($contactName)
+  {
+    $this->contactName = $contactName;
+  }
+  public function getContactName()
+  {
+    return $this->contactName;
+  }
+  public function setContactTitle($contactTitle)
+  {
+    $this->contactTitle = $contactTitle;
+  }
+  public function getContactTitle()
+  {
+    return $this->contactTitle;
+  }
+  public function setContactType($contactType)
+  {
+    $this->contactType = $contactType;
+  }
+  public function getContactType()
+  {
+    return $this->contactType;
+  }
+  public function setSignatureUserProfileId($signatureUserProfileId)
+  {
+    $this->signatureUserProfileId = $signatureUserProfileId;
+  }
+  public function getSignatureUserProfileId()
+  {
+    return $this->signatureUserProfileId;
+  }
+}
+
+class Google_Service_Dfareporting_OrderDocument extends Google_Collection
+{
+  protected $collection_key = 'approvedByUserProfileIds';
+  protected $internal_gapi_mappings = array(
+  );
+  public $accountId;
+  public $advertiserId;
+  public $amendedOrderDocumentId;
+  public $approvedByUserProfileIds;
+  public $cancelled;
+  protected $createdInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $createdInfoDataType = '';
+  public $effectiveDate;
+  public $id;
+  public $kind;
+  public $orderId;
+  public $projectId;
+  public $signed;
+  public $subaccountId;
+  public $title;
+  public $type;
+
+
+  public function setAccountId($accountId)
+  {
+    $this->accountId = $accountId;
+  }
+  public function getAccountId()
+  {
+    return $this->accountId;
+  }
+  public function setAdvertiserId($advertiserId)
+  {
+    $this->advertiserId = $advertiserId;
+  }
+  public function getAdvertiserId()
+  {
+    return $this->advertiserId;
+  }
+  public function setAmendedOrderDocumentId($amendedOrderDocumentId)
+  {
+    $this->amendedOrderDocumentId = $amendedOrderDocumentId;
+  }
+  public function getAmendedOrderDocumentId()
+  {
+    return $this->amendedOrderDocumentId;
+  }
+  public function setApprovedByUserProfileIds($approvedByUserProfileIds)
+  {
+    $this->approvedByUserProfileIds = $approvedByUserProfileIds;
+  }
+  public function getApprovedByUserProfileIds()
+  {
+    return $this->approvedByUserProfileIds;
+  }
+  public function setCancelled($cancelled)
+  {
+    $this->cancelled = $cancelled;
+  }
+  public function getCancelled()
+  {
+    return $this->cancelled;
+  }
+  public function setCreatedInfo(Google_Service_Dfareporting_LastModifiedInfo $createdInfo)
+  {
+    $this->createdInfo = $createdInfo;
+  }
+  public function getCreatedInfo()
+  {
+    return $this->createdInfo;
+  }
+  public function setEffectiveDate($effectiveDate)
+  {
+    $this->effectiveDate = $effectiveDate;
+  }
+  public function getEffectiveDate()
+  {
+    return $this->effectiveDate;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setOrderId($orderId)
+  {
+    $this->orderId = $orderId;
+  }
+  public function getOrderId()
+  {
+    return $this->orderId;
+  }
+  public function setProjectId($projectId)
+  {
+    $this->projectId = $projectId;
+  }
+  public function getProjectId()
+  {
+    return $this->projectId;
+  }
+  public function setSigned($signed)
+  {
+    $this->signed = $signed;
+  }
+  public function getSigned()
+  {
+    return $this->signed;
+  }
+  public function setSubaccountId($subaccountId)
+  {
+    $this->subaccountId = $subaccountId;
+  }
+  public function getSubaccountId()
+  {
+    return $this->subaccountId;
+  }
+  public function setTitle($title)
+  {
+    $this->title = $title;
+  }
+  public function getTitle()
+  {
+    return $this->title;
+  }
+  public function setType($type)
+  {
+    $this->type = $type;
+  }
+  public function getType()
+  {
+    return $this->type;
+  }
+}
+
+class Google_Service_Dfareporting_OrderDocumentsListResponse extends Google_Collection
+{
+  protected $collection_key = 'orderDocuments';
+  protected $internal_gapi_mappings = array(
+  );
+  public $kind;
+  public $nextPageToken;
+  protected $orderDocumentsType = 'Google_Service_Dfareporting_OrderDocument';
+  protected $orderDocumentsDataType = 'array';
+
+
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
+  }
+  public function setOrderDocuments($orderDocuments)
+  {
+    $this->orderDocuments = $orderDocuments;
+  }
+  public function getOrderDocuments()
+  {
+    return $this->orderDocuments;
+  }
+}
+
+class Google_Service_Dfareporting_OrdersListResponse extends Google_Collection
+{
+  protected $collection_key = 'orders';
+  protected $internal_gapi_mappings = array(
+  );
+  public $kind;
+  public $nextPageToken;
+  protected $ordersType = 'Google_Service_Dfareporting_Order';
+  protected $ordersDataType = 'array';
+
+
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
+  }
+  public function setOrders($orders)
+  {
+    $this->orders = $orders;
+  }
+  public function getOrders()
+  {
+    return $this->orders;
   }
 }
 
@@ -15940,12 +18135,21 @@ class Google_Service_Dfareporting_PostalCode extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
+  public $code;
   public $countryCode;
   public $countryDartId;
   public $id;
   public $kind;
 
 
+  public function setCode($code)
+  {
+    $this->code = $code;
+  }
+  public function getCode()
+  {
+    return $this->code;
+  }
   public function setCountryCode($countryCode)
   {
     $this->countryCode = $countryCode;
@@ -16005,6 +18209,70 @@ class Google_Service_Dfareporting_PostalCodesListResponse extends Google_Collect
   public function getPostalCodes()
   {
     return $this->postalCodes;
+  }
+}
+
+class Google_Service_Dfareporting_Pricing extends Google_Collection
+{
+  protected $collection_key = 'flights';
+  protected $internal_gapi_mappings = array(
+  );
+  public $capCostType;
+  public $endDate;
+  protected $flightsType = 'Google_Service_Dfareporting_Flight';
+  protected $flightsDataType = 'array';
+  public $groupType;
+  public $pricingType;
+  public $startDate;
+
+
+  public function setCapCostType($capCostType)
+  {
+    $this->capCostType = $capCostType;
+  }
+  public function getCapCostType()
+  {
+    return $this->capCostType;
+  }
+  public function setEndDate($endDate)
+  {
+    $this->endDate = $endDate;
+  }
+  public function getEndDate()
+  {
+    return $this->endDate;
+  }
+  public function setFlights($flights)
+  {
+    $this->flights = $flights;
+  }
+  public function getFlights()
+  {
+    return $this->flights;
+  }
+  public function setGroupType($groupType)
+  {
+    $this->groupType = $groupType;
+  }
+  public function getGroupType()
+  {
+    return $this->groupType;
+  }
+  public function setPricingType($pricingType)
+  {
+    $this->pricingType = $pricingType;
+  }
+  public function getPricingType()
+  {
+    return $this->pricingType;
+  }
+  public function setStartDate($startDate)
+  {
+    $this->startDate = $startDate;
+  }
+  public function getStartDate()
+  {
+    return $this->startDate;
   }
 }
 
@@ -16215,6 +18483,241 @@ class Google_Service_Dfareporting_ProgrammaticSetting extends Google_Collection
   }
 }
 
+class Google_Service_Dfareporting_Project extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $accountId;
+  public $advertiserId;
+  public $audienceAgeGroup;
+  public $audienceGender;
+  public $budget;
+  public $clientBillingCode;
+  public $clientName;
+  public $endDate;
+  public $id;
+  public $kind;
+  protected $lastModifiedInfoType = 'Google_Service_Dfareporting_LastModifiedInfo';
+  protected $lastModifiedInfoDataType = '';
+  public $name;
+  public $overview;
+  public $startDate;
+  public $subaccountId;
+  public $targetClicks;
+  public $targetConversions;
+  public $targetCpaNanos;
+  public $targetCpcNanos;
+  public $targetCpmNanos;
+  public $targetImpressions;
+
+
+  public function setAccountId($accountId)
+  {
+    $this->accountId = $accountId;
+  }
+  public function getAccountId()
+  {
+    return $this->accountId;
+  }
+  public function setAdvertiserId($advertiserId)
+  {
+    $this->advertiserId = $advertiserId;
+  }
+  public function getAdvertiserId()
+  {
+    return $this->advertiserId;
+  }
+  public function setAudienceAgeGroup($audienceAgeGroup)
+  {
+    $this->audienceAgeGroup = $audienceAgeGroup;
+  }
+  public function getAudienceAgeGroup()
+  {
+    return $this->audienceAgeGroup;
+  }
+  public function setAudienceGender($audienceGender)
+  {
+    $this->audienceGender = $audienceGender;
+  }
+  public function getAudienceGender()
+  {
+    return $this->audienceGender;
+  }
+  public function setBudget($budget)
+  {
+    $this->budget = $budget;
+  }
+  public function getBudget()
+  {
+    return $this->budget;
+  }
+  public function setClientBillingCode($clientBillingCode)
+  {
+    $this->clientBillingCode = $clientBillingCode;
+  }
+  public function getClientBillingCode()
+  {
+    return $this->clientBillingCode;
+  }
+  public function setClientName($clientName)
+  {
+    $this->clientName = $clientName;
+  }
+  public function getClientName()
+  {
+    return $this->clientName;
+  }
+  public function setEndDate($endDate)
+  {
+    $this->endDate = $endDate;
+  }
+  public function getEndDate()
+  {
+    return $this->endDate;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setLastModifiedInfo(Google_Service_Dfareporting_LastModifiedInfo $lastModifiedInfo)
+  {
+    $this->lastModifiedInfo = $lastModifiedInfo;
+  }
+  public function getLastModifiedInfo()
+  {
+    return $this->lastModifiedInfo;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setOverview($overview)
+  {
+    $this->overview = $overview;
+  }
+  public function getOverview()
+  {
+    return $this->overview;
+  }
+  public function setStartDate($startDate)
+  {
+    $this->startDate = $startDate;
+  }
+  public function getStartDate()
+  {
+    return $this->startDate;
+  }
+  public function setSubaccountId($subaccountId)
+  {
+    $this->subaccountId = $subaccountId;
+  }
+  public function getSubaccountId()
+  {
+    return $this->subaccountId;
+  }
+  public function setTargetClicks($targetClicks)
+  {
+    $this->targetClicks = $targetClicks;
+  }
+  public function getTargetClicks()
+  {
+    return $this->targetClicks;
+  }
+  public function setTargetConversions($targetConversions)
+  {
+    $this->targetConversions = $targetConversions;
+  }
+  public function getTargetConversions()
+  {
+    return $this->targetConversions;
+  }
+  public function setTargetCpaNanos($targetCpaNanos)
+  {
+    $this->targetCpaNanos = $targetCpaNanos;
+  }
+  public function getTargetCpaNanos()
+  {
+    return $this->targetCpaNanos;
+  }
+  public function setTargetCpcNanos($targetCpcNanos)
+  {
+    $this->targetCpcNanos = $targetCpcNanos;
+  }
+  public function getTargetCpcNanos()
+  {
+    return $this->targetCpcNanos;
+  }
+  public function setTargetCpmNanos($targetCpmNanos)
+  {
+    $this->targetCpmNanos = $targetCpmNanos;
+  }
+  public function getTargetCpmNanos()
+  {
+    return $this->targetCpmNanos;
+  }
+  public function setTargetImpressions($targetImpressions)
+  {
+    $this->targetImpressions = $targetImpressions;
+  }
+  public function getTargetImpressions()
+  {
+    return $this->targetImpressions;
+  }
+}
+
+class Google_Service_Dfareporting_ProjectsListResponse extends Google_Collection
+{
+  protected $collection_key = 'projects';
+  protected $internal_gapi_mappings = array(
+  );
+  public $kind;
+  public $nextPageToken;
+  protected $projectsType = 'Google_Service_Dfareporting_Project';
+  protected $projectsDataType = 'array';
+
+
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
+  }
+  public function setProjects($projects)
+  {
+    $this->projects = $projects;
+  }
+  public function getProjects()
+  {
+    return $this->projects;
+  }
+}
+
 class Google_Service_Dfareporting_ReachReportCompatibleFields extends Google_Collection
 {
   protected $collection_key = 'reachByFrequencyMetrics';
@@ -16405,6 +18908,215 @@ class Google_Service_Dfareporting_RegionsListResponse extends Google_Collection
   public function getRegions()
   {
     return $this->regions;
+  }
+}
+
+class Google_Service_Dfareporting_RemarketingList extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $accountId;
+  public $active;
+  public $advertiserId;
+  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueDataType = '';
+  public $description;
+  public $id;
+  public $kind;
+  public $lifeSpan;
+  protected $listPopulationRuleType = 'Google_Service_Dfareporting_ListPopulationRule';
+  protected $listPopulationRuleDataType = '';
+  public $listSize;
+  public $listSource;
+  public $name;
+  public $subaccountId;
+
+
+  public function setAccountId($accountId)
+  {
+    $this->accountId = $accountId;
+  }
+  public function getAccountId()
+  {
+    return $this->accountId;
+  }
+  public function setActive($active)
+  {
+    $this->active = $active;
+  }
+  public function getActive()
+  {
+    return $this->active;
+  }
+  public function setAdvertiserId($advertiserId)
+  {
+    $this->advertiserId = $advertiserId;
+  }
+  public function getAdvertiserId()
+  {
+    return $this->advertiserId;
+  }
+  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  {
+    $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
+  }
+  public function getAdvertiserIdDimensionValue()
+  {
+    return $this->advertiserIdDimensionValue;
+  }
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  public function getDescription()
+  {
+    return $this->description;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setLifeSpan($lifeSpan)
+  {
+    $this->lifeSpan = $lifeSpan;
+  }
+  public function getLifeSpan()
+  {
+    return $this->lifeSpan;
+  }
+  public function setListPopulationRule(Google_Service_Dfareporting_ListPopulationRule $listPopulationRule)
+  {
+    $this->listPopulationRule = $listPopulationRule;
+  }
+  public function getListPopulationRule()
+  {
+    return $this->listPopulationRule;
+  }
+  public function setListSize($listSize)
+  {
+    $this->listSize = $listSize;
+  }
+  public function getListSize()
+  {
+    return $this->listSize;
+  }
+  public function setListSource($listSource)
+  {
+    $this->listSource = $listSource;
+  }
+  public function getListSource()
+  {
+    return $this->listSource;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setSubaccountId($subaccountId)
+  {
+    $this->subaccountId = $subaccountId;
+  }
+  public function getSubaccountId()
+  {
+    return $this->subaccountId;
+  }
+}
+
+class Google_Service_Dfareporting_RemarketingListShare extends Google_Collection
+{
+  protected $collection_key = 'sharedAdvertiserIds';
+  protected $internal_gapi_mappings = array(
+  );
+  public $kind;
+  public $remarketingListId;
+  public $sharedAccountIds;
+  public $sharedAdvertiserIds;
+
+
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setRemarketingListId($remarketingListId)
+  {
+    $this->remarketingListId = $remarketingListId;
+  }
+  public function getRemarketingListId()
+  {
+    return $this->remarketingListId;
+  }
+  public function setSharedAccountIds($sharedAccountIds)
+  {
+    $this->sharedAccountIds = $sharedAccountIds;
+  }
+  public function getSharedAccountIds()
+  {
+    return $this->sharedAccountIds;
+  }
+  public function setSharedAdvertiserIds($sharedAdvertiserIds)
+  {
+    $this->sharedAdvertiserIds = $sharedAdvertiserIds;
+  }
+  public function getSharedAdvertiserIds()
+  {
+    return $this->sharedAdvertiserIds;
+  }
+}
+
+class Google_Service_Dfareporting_RemarketingListsListResponse extends Google_Collection
+{
+  protected $collection_key = 'remarketingLists';
+  protected $internal_gapi_mappings = array(
+  );
+  public $kind;
+  public $nextPageToken;
+  protected $remarketingListsType = 'Google_Service_Dfareporting_RemarketingList';
+  protected $remarketingListsDataType = 'array';
+
+
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
+  }
+  public function setRemarketingLists($remarketingLists)
+  {
+    $this->remarketingLists = $remarketingLists;
+  }
+  public function getRemarketingLists()
+  {
+    return $this->remarketingLists;
   }
 }
 
@@ -17532,13 +20244,24 @@ class Google_Service_Dfareporting_SiteContact extends Google_Model
 {
   protected $internal_gapi_mappings = array(
   );
+  public $address;
   public $contactType;
   public $email;
   public $firstName;
   public $id;
   public $lastName;
+  public $phone;
+  public $title;
 
 
+  public function setAddress($address)
+  {
+    $this->address = $address;
+  }
+  public function getAddress()
+  {
+    return $this->address;
+  }
   public function setContactType($contactType)
   {
     $this->contactType = $contactType;
@@ -17578,6 +20301,22 @@ class Google_Service_Dfareporting_SiteContact extends Google_Model
   public function getLastName()
   {
     return $this->lastName;
+  }
+  public function setPhone($phone)
+  {
+    $this->phone = $phone;
+  }
+  public function getPhone()
+  {
+    return $this->phone;
+  }
+  public function setTitle($title)
+  {
+    $this->title = $title;
+  }
+  public function getTitle()
+  {
+    return $this->title;
   }
 }
 
@@ -18036,6 +20775,160 @@ class Google_Service_Dfareporting_TargetWindow extends Google_Model
   public function getTargetWindowOption()
   {
     return $this->targetWindowOption;
+  }
+}
+
+class Google_Service_Dfareporting_TargetableRemarketingList extends Google_Model
+{
+  protected $internal_gapi_mappings = array(
+  );
+  public $accountId;
+  public $active;
+  public $advertiserId;
+  protected $advertiserIdDimensionValueType = 'Google_Service_Dfareporting_DimensionValue';
+  protected $advertiserIdDimensionValueDataType = '';
+  public $description;
+  public $id;
+  public $kind;
+  public $lifeSpan;
+  public $listSize;
+  public $listSource;
+  public $name;
+  public $subaccountId;
+
+
+  public function setAccountId($accountId)
+  {
+    $this->accountId = $accountId;
+  }
+  public function getAccountId()
+  {
+    return $this->accountId;
+  }
+  public function setActive($active)
+  {
+    $this->active = $active;
+  }
+  public function getActive()
+  {
+    return $this->active;
+  }
+  public function setAdvertiserId($advertiserId)
+  {
+    $this->advertiserId = $advertiserId;
+  }
+  public function getAdvertiserId()
+  {
+    return $this->advertiserId;
+  }
+  public function setAdvertiserIdDimensionValue(Google_Service_Dfareporting_DimensionValue $advertiserIdDimensionValue)
+  {
+    $this->advertiserIdDimensionValue = $advertiserIdDimensionValue;
+  }
+  public function getAdvertiserIdDimensionValue()
+  {
+    return $this->advertiserIdDimensionValue;
+  }
+  public function setDescription($description)
+  {
+    $this->description = $description;
+  }
+  public function getDescription()
+  {
+    return $this->description;
+  }
+  public function setId($id)
+  {
+    $this->id = $id;
+  }
+  public function getId()
+  {
+    return $this->id;
+  }
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setLifeSpan($lifeSpan)
+  {
+    $this->lifeSpan = $lifeSpan;
+  }
+  public function getLifeSpan()
+  {
+    return $this->lifeSpan;
+  }
+  public function setListSize($listSize)
+  {
+    $this->listSize = $listSize;
+  }
+  public function getListSize()
+  {
+    return $this->listSize;
+  }
+  public function setListSource($listSource)
+  {
+    $this->listSource = $listSource;
+  }
+  public function getListSource()
+  {
+    return $this->listSource;
+  }
+  public function setName($name)
+  {
+    $this->name = $name;
+  }
+  public function getName()
+  {
+    return $this->name;
+  }
+  public function setSubaccountId($subaccountId)
+  {
+    $this->subaccountId = $subaccountId;
+  }
+  public function getSubaccountId()
+  {
+    return $this->subaccountId;
+  }
+}
+
+class Google_Service_Dfareporting_TargetableRemarketingListsListResponse extends Google_Collection
+{
+  protected $collection_key = 'targetableRemarketingLists';
+  protected $internal_gapi_mappings = array(
+  );
+  public $kind;
+  public $nextPageToken;
+  protected $targetableRemarketingListsType = 'Google_Service_Dfareporting_TargetableRemarketingList';
+  protected $targetableRemarketingListsDataType = 'array';
+
+
+  public function setKind($kind)
+  {
+    $this->kind = $kind;
+  }
+  public function getKind()
+  {
+    return $this->kind;
+  }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
+  }
+  public function setTargetableRemarketingLists($targetableRemarketingLists)
+  {
+    $this->targetableRemarketingLists = $targetableRemarketingLists;
+  }
+  public function getTargetableRemarketingLists()
+  {
+    return $this->targetableRemarketingLists;
   }
 }
 
